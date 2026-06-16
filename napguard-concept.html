@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NapGuard Smart Nap Mask Concept</title>
+  <style>
+    :root {
+      --ink: #171717;
+      --muted: #64605b;
+      --paper: #f7f4ef;
+      --shell: #23211f;
+      --fabric: #35312d;
+      --cushion: #cfc3b4;
+      --line: rgba(23, 23, 23, .14);
+      --teal: #1f8f8a;
+      --mint: #9ad7cd;
+      --coral: #de6b52;
+      --gold: #c79a3b;
+      --cream: #fffaf2;
+      --panel: rgba(255, 250, 242, .72);
+      --shadow: 0 22px 70px rgba(24, 22, 19, .16);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        linear-gradient(180deg, #f7f4ef 0%, #f1ede4 44%, #f8f5ef 100%);
+      color: var(--ink);
+    }
+
+    a { color: inherit; }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px clamp(18px, 4vw, 56px);
+      backdrop-filter: blur(18px);
+      background: rgba(247, 244, 239, .82);
+      border-bottom: 1px solid rgba(23, 23, 23, .08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 18px;
+      border-radius: 50% 50% 46% 46% / 60% 60% 45% 45%;
+      background: linear-gradient(135deg, var(--shell), #4a443e);
+      box-shadow: inset 0 -2px 0 rgba(255,255,255,.14);
+      flex: 0 0 auto;
+      position: relative;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 8px;
+      width: 6px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--mint);
+    }
+
+    .nav {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      color: #494641;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav a:hover { border-color: currentColor; }
+
+    .hero {
+      min-height: 92vh;
+      padding: 88px clamp(18px, 4vw, 56px) 34px;
+      display: grid;
+      grid-template-columns: minmax(300px, .82fr) minmax(360px, 1.18fr);
+      align-items: center;
+      gap: clamp(22px, 5vw, 70px);
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      padding-top: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      font-weight: 720;
+      color: #524d46;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 5px rgba(31, 143, 138, .12);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(48px, 7.5vw, 116px);
+      line-height: .92;
+      letter-spacing: 0;
+      font-weight: 820;
+    }
+
+    .hero-sub {
+      margin: 26px 0 0;
+      max-width: 610px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.45;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: rgba(255, 250, 242, .62);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 720;
+      box-shadow: 0 7px 22px rgba(23, 23, 23, .06);
+    }
+
+    .button.primary {
+      background: var(--ink);
+      color: #fffaf2;
+      border-color: var(--ink);
+    }
+
+    .hero-note {
+      margin-top: 24px;
+      max-width: 560px;
+      color: #716b63;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .viewer-wrap {
+      position: relative;
+      min-height: min(650px, 72vh);
+      display: grid;
+      align-items: center;
+    }
+
+    .viewer {
+      position: relative;
+      min-height: min(650px, 72vh);
+      width: 100%;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      min-height: min(650px, 72vh);
+      display: block;
+      cursor: grab;
+    }
+
+    canvas:active { cursor: grabbing; }
+
+    .viewer-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-weight: 700;
+      background: rgba(247, 244, 239, .58);
+    }
+
+    .callout {
+      position: absolute;
+      z-index: 4;
+      max-width: 168px;
+      padding: 9px 10px;
+      border: 1px solid rgba(23, 23, 23, .12);
+      border-radius: 8px;
+      background: rgba(255, 250, 242, .82);
+      box-shadow: 0 10px 30px rgba(23, 23, 23, .10);
+      color: #3e3a35;
+      font-size: 12px;
+      line-height: 1.25;
+      pointer-events: none;
+    }
+
+    .callout strong {
+      display: block;
+      color: var(--ink);
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .callout::before {
+      content: "";
+      position: absolute;
+      width: 42px;
+      height: 1px;
+      background: rgba(23, 23, 23, .32);
+    }
+
+    .callout.module { top: 18%; right: 8%; }
+    .callout.module::before { left: -42px; top: 28px; transform: rotate(12deg); transform-origin: right; }
+    .callout.sensors { left: 3%; top: 31%; }
+    .callout.sensors::before { right: -42px; top: 30px; transform: rotate(-10deg); transform-origin: left; }
+    .callout.port { right: 9%; bottom: 19%; }
+    .callout.port::before { left: -42px; top: 16px; transform: rotate(-18deg); transform-origin: right; }
+
+    main {
+      background: #fbf8f2;
+    }
+
+    section {
+      padding: clamp(54px, 8vw, 98px) clamp(18px, 4vw, 56px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      max-width: 840px;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 4.4vw, 64px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 790px;
+      margin: 17px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .description-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .copy-block {
+      color: #4d4943;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .copy-block p {
+      margin: 0 0 16px;
+    }
+
+    .spec-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .spec {
+      min-height: 112px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 242, .62);
+    }
+
+    .spec h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .spec p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .diagram-zone {
+      display: grid;
+      grid-template-columns: minmax(320px, 1.1fr) minmax(300px, .9fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .diagram {
+      width: 100%;
+      min-height: 480px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,250,242,.2)),
+        #ece6db;
+      box-shadow: var(--shadow);
+    }
+
+    .legend {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(23, 23, 23, .1);
+      color: #514d47;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .key {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      border-radius: 4px;
+      background: var(--teal);
+      border: 1px solid rgba(23, 23, 23, .16);
+    }
+
+    .key.eog { background: var(--coral); }
+    .key.module { background: var(--gold); }
+    .key.power { background: #6e6258; }
+    .key.haptic { background: #8e79d8; }
+    .key.comfort { background: var(--cushion); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      min-height: 190px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 242, .58);
+    }
+
+    .step-num {
+      color: var(--teal);
+      font-weight: 820;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      margin: 0 0 9px;
+      font-size: 18px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .exploded {
+      display: grid;
+      gap: 18px;
+      max-width: 950px;
+    }
+
+    .layer {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 242, .58);
+      box-shadow: 0 10px 36px rgba(23,23,23,.05);
+    }
+
+    .layer-visual {
+      height: 46px;
+      border-radius: 999px;
+      background: var(--fabric);
+      box-shadow: inset 0 -8px 16px rgba(0,0,0,.14);
+    }
+
+    .layer:nth-child(2) .layer-visual {
+      background:
+        repeating-linear-gradient(90deg, rgba(31,143,138,.95), rgba(31,143,138,.95) 18px, rgba(154,215,205,.95) 18px, rgba(154,215,205,.95) 30px);
+      height: 24px;
+    }
+
+    .layer:nth-child(3) .layer-visual {
+      background: linear-gradient(90deg, #806c3e 0 24%, #3e3a35 24% 48%, #8e79d8 48% 66%, #6e6258 66% 100%);
+      height: 34px;
+      border-radius: 8px;
+    }
+
+    .layer:nth-child(4) .layer-visual {
+      background: var(--cushion);
+      height: 58px;
+      box-shadow: inset 0 7px 18px rgba(255,255,255,.28);
+    }
+
+    .layer h3 {
+      margin: 0 0 5px;
+      font-size: 17px;
+    }
+
+    .layer p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .compare-item {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 250, 242, .58);
+      min-height: 210px;
+    }
+
+    .compare-item h3 {
+      margin: 0 0 10px;
+      font-size: 19px;
+    }
+
+    .compare-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .footer {
+      padding: 28px clamp(18px, 4vw, 56px);
+      color: #716b63;
+      font-size: 13px;
+      line-height: 1.5;
+      background: #eee8dd;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .description-grid,
+      .diagram-zone {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 86px;
+      }
+
+      .viewer-wrap,
+      .viewer,
+      canvas {
+        min-height: 520px;
+      }
+
+      .steps,
+      .compare,
+      .spec-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        position: sticky;
+        padding: 12px 16px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 38px 16px 28px;
+        gap: 12px;
+      }
+
+      h1 {
+        font-size: clamp(44px, 15vw, 66px);
+      }
+
+      .hero-sub {
+        font-size: 17px;
+      }
+
+      .viewer-wrap,
+      .viewer,
+      canvas {
+        min-height: 430px;
+      }
+
+      .callout {
+        display: none;
+      }
+
+      section {
+        padding: 48px 16px;
+      }
+
+      .steps,
+      .compare,
+      .spec-list,
+      .layer {
+        grid-template-columns: 1fr;
+      }
+
+      .diagram {
+        min-height: 360px;
+      }
+
+      .layer-visual {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="NapGuard navigation">
+    <div class="brand" aria-label="NapGuard">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>NapGuard</span>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#design">Design</a>
+      <a href="#layout">Sensor layout</a>
+      <a href="#works">How it works</a>
+      <a href="#layers">Layers</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="dot"></span>Smart nap mask concept</div>
+      <h1>Take a nap without accidentally sleeping for 3 hours.</h1>
+      <p class="hero-sub">NapGuard is a lightweight, fabric-first smart sleep mask for controlled power naps. It estimates likely sleep onset with low-profile EEG/EOG-style sensing, then starts the nap timer when rest actually begins.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#model">View 3D concept</a>
+        <a class="button" href="#layout">See sensor layout</a>
+      </div>
+      <p class="hero-note">Concept prototype only. NapGuard is positioned as a consumer nap aid, not a medical device, full-night sleep tracker, meditation headband, or bulky EEG product.</p>
+    </div>
+    <div class="viewer-wrap" id="model">
+      <div class="viewer" id="viewer">
+        <canvas id="napguard-canvas" aria-label="Interactive 3D NapGuard model"></canvas>
+        <div class="viewer-fallback" id="viewer-fallback">3D model needs internet access to load Three.js</div>
+      </div>
+      <div class="callout module"><strong>Thin smart module</strong>Processor, Bluetooth, IMU, battery, and haptic driver in one shallow pod.</div>
+      <div class="callout sensors"><strong>Hidden sensors</strong>Soft conductive pads sit inside the upper edge and temple zones.</div>
+      <div class="callout port"><strong>Low-profile charging</strong>Small USB-C or magnetic contact on the side face.</div>
+    </div>
+  </section>
+
+  <main>
+    <section id="design">
+      <div class="section-head">
+        <h2>Premium mask first, electronics second.</h2>
+        <p class="lead">The form factor is intentionally close to a normal nap mask: soft, light, flexible, and easy to wear on a couch, library chair, dorm bed, flight, or commuter train.</p>
+      </div>
+      <div class="description-grid">
+        <div class="copy-block">
+          <p>NapGuard uses a gently curved eye-mask silhouette with a soft outer textile shell and a cushioned inner eye cup. The mask body is wider across the eyes and narrower at the nose bridge, with light ventilation channels along the lower edge so it feels less hot during a short nap.</p>
+          <p>Thin conductive sensor pads are embedded inside the upper forehead edge rather than exposed as a separate headband. Near-eye EOG-style zones sit toward the outer eye and temple region, where they can observe eye-movement patterns while remaining hidden behind fabric.</p>
+          <p>A shallow electronics pod sits above the nose bridge in this concept, though a side-pod variant is also viable. The module contains the processor, Bluetooth radio, IMU, rechargeable battery, haptic motor driver, small status LED, and optional start/stop button. A soft elastic strap adjusts at the back and avoids the all-around rigid feel of a full sensor headband.</p>
+        </div>
+        <div class="spec-list">
+          <article class="spec">
+            <h3>Soft outer shell</h3>
+            <p>Premium matte fabric with slight stretch and enough structure to hide embedded traces.</p>
+          </article>
+          <article class="spec">
+            <h3>Cushioned eye area</h3>
+            <p>Contoured inner padding reduces pressure on eyelids and leaves room for blinking.</p>
+          </article>
+          <article class="spec">
+            <h3>Minimal electronics</h3>
+            <p>One shallow module keeps the product from reading as a VR headset or medical device.</p>
+          </article>
+          <article class="spec">
+            <h3>Silent wake-up</h3>
+            <p>Small haptic motor nudges the user awake without a disruptive phone alarm.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="layout">
+      <div class="section-head">
+        <h2>Labeled component layout.</h2>
+        <p class="lead">The diagram shows the hidden functional map behind the mask: sensing along the upper edge, eye movement sensing near the outer eyes, and a compact electronics zone above the nose bridge.</p>
+      </div>
+      <div class="diagram-zone">
+        <svg class="diagram" viewBox="0 0 920 520" role="img" aria-labelledby="diagram-title diagram-desc">
+          <title id="diagram-title">NapGuard component layout diagram</title>
+          <desc id="diagram-desc">Front view of smart nap mask with labeled EEG pads, EOG areas, electronics module, battery, vibration motor, charging port, LED, button, strap, and ventilation.</desc>
+          <defs>
+            <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#171717" flood-opacity=".18"/>
+            </filter>
+            <linearGradient id="maskGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#24211f"/>
+              <stop offset=".52" stop-color="#39342f"/>
+              <stop offset="1" stop-color="#25221f"/>
+            </linearGradient>
+          </defs>
+
+          <path d="M76 282 C110 188 205 128 334 137 C390 141 423 164 460 164 C497 164 530 141 586 137 C715 128 810 188 844 282 C817 373 719 410 603 385 C548 373 509 348 460 348 C411 348 372 373 317 385 C201 410 103 373 76 282 Z" fill="url(#maskGrad)" filter="url(#shadow)"/>
+          <path d="M86 281 C132 214 212 177 330 184 C388 188 426 213 460 213 C494 213 532 188 590 184 C708 177 788 214 834 281 C805 337 716 356 610 332 C553 319 511 294 460 294 C409 294 367 319 310 332 C204 356 115 337 86 281 Z" fill="#cfc3b4" opacity=".88"/>
+          <path d="M376 324 C403 302 427 293 460 293 C493 293 517 302 544 324 C519 347 493 358 460 358 C427 358 401 347 376 324 Z" fill="#181715" opacity=".72"/>
+          <path d="M58 270 C0 255 -45 255 -104 268" fill="none" stroke="#38342f" stroke-width="28" stroke-linecap="round"/>
+          <path d="M862 270 C920 255 965 255 1024 268" fill="none" stroke="#38342f" stroke-width="28" stroke-linecap="round"/>
+
+          <g id="eeg">
+            <rect x="250" y="156" width="74" height="18" rx="9" fill="#1f8f8a"/>
+            <rect x="346" y="167" width="74" height="18" rx="9" fill="#1f8f8a"/>
+            <rect x="500" y="167" width="74" height="18" rx="9" fill="#1f8f8a"/>
+            <rect x="596" y="156" width="74" height="18" rx="9" fill="#1f8f8a"/>
+          </g>
+
+          <ellipse cx="249" cy="278" rx="38" ry="46" fill="#de6b52" opacity=".94"/>
+          <ellipse cx="671" cy="278" rx="38" ry="46" fill="#de6b52" opacity=".94"/>
+          <rect x="405" y="122" width="110" height="62" rx="18" fill="#c79a3b"/>
+          <rect x="426" y="140" width="68" height="14" rx="7" fill="#171717" opacity=".55"/>
+          <circle cx="499" cy="133" r="5" fill="#9ad7cd"/>
+          <rect x="509" y="149" width="6" height="26" rx="3" fill="#fffaf2" opacity=".75"/>
+          <rect x="526" y="180" width="88" height="24" rx="12" fill="#6e6258"/>
+          <rect x="310" y="352" width="74" height="20" rx="10" fill="#8e79d8"/>
+          <rect x="688" y="214" width="52" height="16" rx="8" fill="#171717"/>
+          <rect x="693" y="219" width="28" height="6" rx="3" fill="#cfc3b4"/>
+          <g stroke="#9d8f7c" stroke-width="4" stroke-linecap="round" opacity=".8">
+            <path d="M177 346 C205 363 242 371 284 369"/>
+            <path d="M636 369 C678 371 715 363 743 346"/>
+            <path d="M176 212 C201 194 235 184 279 181"/>
+            <path d="M641 181 C685 184 719 194 744 212"/>
+          </g>
+
+          <g fill="none" stroke="#171717" stroke-width="2" opacity=".7">
+            <path d="M314 150 L244 80"/>
+            <path d="M250 274 L122 232"/>
+            <path d="M460 122 L460 58"/>
+            <path d="M571 193 L640 102"/>
+            <path d="M345 361 L228 440"/>
+            <path d="M714 222 L812 152"/>
+            <path d="M504 132 L678 74"/>
+          </g>
+
+          <g font-family="Inter, Arial, sans-serif" fill="#171717" font-size="20" font-weight="760">
+            <text x="70" y="228">EOG temple zones</text>
+            <text x="166" y="74">Forehead EEG pads</text>
+            <text x="378" y="48">Button + LED</text>
+            <text x="618" y="92">Battery</text>
+            <text x="675" y="68">Processor + Bluetooth</text>
+            <text x="722" y="148">Charging port</text>
+            <text x="86" y="458">Haptic motor</text>
+            <text x="612" y="445">Ventilation padding</text>
+          </g>
+        </svg>
+
+        <div class="legend" aria-label="Diagram legend">
+          <div class="legend-item"><span class="key"></span><span><strong>EEG sensor pads:</strong> thin, soft conductive pads along the upper inside edge estimate likely sleep onset without a separate headband.</span></div>
+          <div class="legend-item"><span class="key eog"></span><span><strong>EOG/eye movement zones:</strong> temple-side areas help detect eye movement patterns associated with settling into sleep.</span></div>
+          <div class="legend-item"><span class="key module"></span><span><strong>Processor/Bluetooth:</strong> compact pod manages nap mode, phone pairing, and local sensor processing.</span></div>
+          <div class="legend-item"><span class="key power"></span><span><strong>Battery and port:</strong> small rechargeable cell with low-profile USB-C or magnetic charging access.</span></div>
+          <div class="legend-item"><span class="key haptic"></span><span><strong>Vibration motor:</strong> quiet wake cue embedded away from the eyelid pressure zone.</span></div>
+          <div class="legend-item"><span class="key comfort"></span><span><strong>Comfort padding:</strong> vented cushion layer keeps contact soft and reduces heat buildup.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="works">
+      <div class="section-head">
+        <h2>How NapGuard works.</h2>
+        <p class="lead">The product promise is simple: nap timing should begin when the user likely falls asleep, not when they lie down and hope for the best.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="step-num">01</div>
+          <h3>Start nap mode</h3>
+          <p>User taps the mask button or starts a nap from the phone. The timer waits in a settling phase.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">02</div>
+          <h3>Watch for sleep onset</h3>
+          <p>EEG/EOG-style signals plus motion cues estimate when the user likely transitions from awake to asleep.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">03</div>
+          <h3>Begin actual nap timer</h3>
+          <p>A 20-minute nap can begin after probable sleep onset, preserving the intended rest window.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">04</div>
+          <h3>Wake gently</h3>
+          <p>Silent haptics help avoid oversleeping without forcing a loud phone alarm in shared spaces.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="layers">
+      <div class="section-head">
+        <h2>Exploded layer concept.</h2>
+        <p class="lead">NapGuard’s construction keeps sensing and electronics close to the mask body while preserving the feel of soft consumer sleepwear.</p>
+      </div>
+      <div class="exploded">
+        <article class="layer">
+          <div class="layer-visual" aria-hidden="true"></div>
+          <div><h3>Outer fabric layer</h3><p>Durable matte textile shell, slightly structured to hide components and resist wrinkling in a backpack.</p></div>
+        </article>
+        <article class="layer">
+          <div class="layer-visual" aria-hidden="true"></div>
+          <div><h3>Flexible sensor layer</h3><p>Printed conductive traces and soft electrode pads routed along the upper edge and near the outer-eye region.</p></div>
+        </article>
+        <article class="layer">
+          <div class="layer-visual" aria-hidden="true"></div>
+          <div><h3>Electronics layer</h3><p>Thin rigid-flex island for battery, IMU, processor, Bluetooth, LED, button, haptic driver, and charging contacts.</p></div>
+        </article>
+        <article class="layer">
+          <div class="layer-visual" aria-hidden="true"></div>
+          <div><h3>Inner cushion layer</h3><p>Soft breathable foam around the eye cups, with ventilation breaks to reduce heat during short naps.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="different">
+      <div class="section-head">
+        <h2>Different from alarms and headbands.</h2>
+        <p class="lead">NapGuard is intentionally narrow: it is a nap-specific oversleep prevention product, not a full sleep lab on the face.</p>
+      </div>
+      <div class="compare">
+        <article class="compare-item">
+          <h3>Normal alarm</h3>
+          <p>Starts counting when the user lies down, so a “20-minute nap” may become five minutes of real sleep after a long wind-down.</p>
+        </article>
+        <article class="compare-item">
+          <h3>Bulky EEG headband</h3>
+          <p>Can feel technical, medical, or uncomfortable for a student trying to nap between classes or while traveling.</p>
+        </article>
+        <article class="compare-item">
+          <h3>NapGuard</h3>
+          <p>Looks like a premium sleep mask, focuses on likely sleep onset, and uses a gentle haptic wake cue to avoid accidental multi-hour naps.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    NapGuard concept prototype. Sensor placement and algorithms are illustrative and would require validation, comfort testing, safety review, and privacy review before any production product.
+  </footer>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.164.1/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "https://unpkg.com/three@0.164.1/examples/jsm/controls/OrbitControls.js";
+
+    const canvas = document.querySelector("#napguard-canvas");
+    const viewer = document.querySelector("#viewer");
+    const fallback = document.querySelector("#viewer-fallback");
+    fallback.style.display = "none";
+    const scene = new THREE.Scene();
+    scene.background = null;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+    camera.position.set(0, 2.1, 9.2);
+
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.enablePan = false;
+    controls.minDistance = 6.8;
+    controls.maxDistance = 12;
+    controls.maxPolarAngle = Math.PI * 0.63;
+    controls.minPolarAngle = Math.PI * 0.25;
+    controls.target.set(0, 0.1, 0);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const hemi = new THREE.HemisphereLight(0xfffbf1, 0x5a5148, 2.4);
+    scene.add(hemi);
+
+    const key = new THREE.DirectionalLight(0xffffff, 3.2);
+    key.position.set(-3, 5, 5);
+    key.castShadow = true;
+    scene.add(key);
+
+    const rim = new THREE.DirectionalLight(0x9ad7cd, 2.1);
+    rim.position.set(4.5, 2.2, -4);
+    scene.add(rim);
+
+    const fabricMat = new THREE.MeshStandardMaterial({
+      color: 0x302c28,
+      roughness: 0.88,
+      metalness: 0.02,
+      side: THREE.DoubleSide
+    });
+
+    const cushionMat = new THREE.MeshStandardMaterial({
+      color: 0xcfc3b4,
+      roughness: 0.72,
+      metalness: 0.02
+    });
+
+    const sensorMat = new THREE.MeshStandardMaterial({
+      color: 0x1f8f8a,
+      roughness: 0.45,
+      metalness: 0.08,
+      emissive: 0x0d3d3a,
+      emissiveIntensity: 0.08
+    });
+
+    const eogMat = new THREE.MeshStandardMaterial({
+      color: 0xde6b52,
+      roughness: 0.58,
+      metalness: 0.03
+    });
+
+    const moduleMat = new THREE.MeshStandardMaterial({
+      color: 0xb98f34,
+      roughness: 0.42,
+      metalness: 0.18
+    });
+
+    const darkMat = new THREE.MeshStandardMaterial({
+      color: 0x171717,
+      roughness: 0.62,
+      metalness: 0.16
+    });
+
+    const violetMat = new THREE.MeshStandardMaterial({
+      color: 0x8e79d8,
+      roughness: 0.5,
+      metalness: 0.05
+    });
+
+    const maskShape = new THREE.Shape();
+    maskShape.moveTo(-4.25, -0.08);
+    maskShape.bezierCurveTo(-3.85, 1.26, -2.32, 1.62, -1.16, 1.32);
+    maskShape.bezierCurveTo(-0.58, 1.16, -0.42, 0.86, 0, 0.86);
+    maskShape.bezierCurveTo(0.42, 0.86, 0.58, 1.16, 1.16, 1.32);
+    maskShape.bezierCurveTo(2.32, 1.62, 3.85, 1.26, 4.25, -0.08);
+    maskShape.bezierCurveTo(3.82, -1.34, 2.24, -1.72, 1.04, -1.34);
+    maskShape.bezierCurveTo(0.48, -1.16, 0.36, -0.78, 0, -0.78);
+    maskShape.bezierCurveTo(-0.36, -0.78, -0.48, -1.16, -1.04, -1.34);
+    maskShape.bezierCurveTo(-2.24, -1.72, -3.82, -1.34, -4.25, -0.08);
+
+    const maskGeom = new THREE.ExtrudeGeometry(maskShape, {
+      depth: 0.34,
+      bevelEnabled: true,
+      bevelThickness: 0.16,
+      bevelSize: 0.18,
+      bevelSegments: 18,
+      curveSegments: 42
+    });
+    maskGeom.center();
+    const mask = new THREE.Mesh(maskGeom, fabricMat);
+    mask.scale.set(1, 1, 1);
+    mask.rotation.x = -0.08;
+    mask.castShadow = true;
+    mask.receiveShadow = true;
+    group.add(mask);
+
+    const innerLeft = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 24), cushionMat);
+    innerLeft.scale.set(1.42, .7, .18);
+    innerLeft.position.set(-1.7, -.24, .31);
+    innerLeft.castShadow = true;
+    group.add(innerLeft);
+
+    const innerRight = innerLeft.clone();
+    innerRight.position.x = 1.7;
+    group.add(innerRight);
+
+    const bridge = new THREE.Mesh(new THREE.SphereGeometry(.58, 32, 16), darkMat);
+    bridge.scale.set(.82, .35, .18);
+    bridge.position.set(0, -.88, .36);
+    group.add(bridge);
+
+    const module = new THREE.Mesh(new THREE.BoxGeometry(1.2, .62, .36, 8, 4, 4), moduleMat);
+    module.position.set(0, 1.13, .42);
+    module.castShadow = true;
+    group.add(module);
+
+    const button = new THREE.Mesh(new THREE.CylinderGeometry(.16, .16, .055, 32), darkMat);
+    button.rotation.x = Math.PI / 2;
+    button.position.set(-.22, 1.44, .63);
+    group.add(button);
+
+    const led = new THREE.Mesh(new THREE.SphereGeometry(.07, 16, 16), sensorMat);
+    led.position.set(.32, 1.44, .62);
+    group.add(led);
+
+    const battery = new THREE.Mesh(new THREE.BoxGeometry(.92, .22, .18, 4, 4, 4), darkMat);
+    battery.position.set(1.06, .92, .49);
+    battery.rotation.z = -.18;
+    group.add(battery);
+
+    const haptic = new THREE.Mesh(new THREE.CylinderGeometry(.18, .18, .62, 32), violetMat);
+    haptic.rotation.z = Math.PI / 2;
+    haptic.position.set(-1.45, -1.18, .42);
+    group.add(haptic);
+
+    const portShell = new THREE.Mesh(new THREE.BoxGeometry(.5, .18, .08), darkMat);
+    portShell.position.set(3.55, .28, .47);
+    portShell.rotation.z = -.08;
+    group.add(portShell);
+
+    const portSlot = new THREE.Mesh(new THREE.BoxGeometry(.28, .055, .09), cushionMat);
+    portSlot.position.set(3.56, .28, .535);
+    portSlot.rotation.z = -.08;
+    group.add(portSlot);
+
+    const strapMat = new THREE.MeshStandardMaterial({
+      color: 0x35312d,
+      roughness: .84,
+      metalness: .01
+    });
+
+    function makeStrap(side = 1) {
+      const curve = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(side * 4.12, .05, .02),
+        new THREE.Vector3(side * 5.1, .15, -.42),
+        new THREE.Vector3(side * 5.85, .08, -1.02),
+        new THREE.Vector3(side * 6.2, -.08, -1.7)
+      ]);
+      const geom = new THREE.TubeGeometry(curve, 32, .12, 12, false);
+      const mesh = new THREE.Mesh(geom, strapMat);
+      mesh.castShadow = true;
+      return mesh;
+    }
+    group.add(makeStrap(1), makeStrap(-1));
+
+    function roundedPad(x, y, z, w, h, mat, rot = 0) {
+      const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, .06, 8, 4, 1), mat);
+      mesh.position.set(x, y, z);
+      mesh.rotation.z = rot;
+      group.add(mesh);
+      return mesh;
+    }
+
+    const eegPads = [-2.05, -.82, .82, 2.05].map((x) =>
+      roundedPad(x, 1.02 + (Math.abs(x) > 1 ? .09 : 0), .58, .64, .16, sensorMat, x * .08)
+    );
+
+    const eogLeft = new THREE.Mesh(new THREE.SphereGeometry(.36, 32, 16), eogMat);
+    eogLeft.scale.set(.72, 1.08, .11);
+    eogLeft.position.set(-2.96, -.18, .55);
+    eogLeft.rotation.z = -.15;
+    group.add(eogLeft);
+    const eogRight = eogLeft.clone();
+    eogRight.position.x = 2.96;
+    eogRight.rotation.z = .15;
+    group.add(eogRight);
+
+    for (let i = 0; i < 6; i++) {
+      const vent = new THREE.Mesh(new THREE.BoxGeometry(.46, .045, .05), cushionMat);
+      vent.position.set(-2.25 + i * .9, -1.42 + Math.abs(i - 2.5) * .045, .55);
+      vent.rotation.z = (i - 2.5) * .04;
+      group.add(vent);
+    }
+
+    const floor = new THREE.Mesh(
+      new THREE.PlaneGeometry(16, 10),
+      new THREE.ShadowMaterial({ color: 0x171717, opacity: .11 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -2.3;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    const labelLayer = document.createElement("div");
+    labelLayer.style.position = "absolute";
+    labelLayer.style.inset = "0";
+    labelLayer.style.pointerEvents = "none";
+    viewer.appendChild(labelLayer);
+
+    const labels = [
+      { text: "EEG pads", object: eegPads[0], color: "#1f8f8a" },
+      { text: "EOG zones", object: eogRight, color: "#de6b52" },
+      { text: "haptic motor", object: haptic, color: "#8e79d8" },
+      { text: "charging port", object: portShell, color: "#171717" }
+    ].map(({ text, object, color }) => {
+      const el = document.createElement("div");
+      el.textContent = text;
+      el.style.position = "absolute";
+      el.style.padding = "5px 7px";
+      el.style.borderRadius = "7px";
+      el.style.background = "rgba(255,250,242,.82)";
+      el.style.border = "1px solid rgba(23,23,23,.14)";
+      el.style.color = color;
+      el.style.font = "700 12px Inter, system-ui, sans-serif";
+      el.style.whiteSpace = "nowrap";
+      el.style.boxShadow = "0 9px 24px rgba(23,23,23,.1)";
+      labelLayer.appendChild(el);
+      return { el, object };
+    });
+
+    const resize = () => {
+      const rect = viewer.getBoundingClientRect();
+      renderer.setSize(rect.width, rect.height, false);
+      camera.aspect = rect.width / rect.height;
+      camera.updateProjectionMatrix();
+    };
+
+    window.addEventListener("resize", resize);
+    resize();
+
+    const tmp = new THREE.Vector3();
+    const tick = () => {
+      group.rotation.y += 0.0022;
+      group.rotation.x = Math.sin(performance.now() * .0005) * .025;
+      controls.update();
+
+      const rect = viewer.getBoundingClientRect();
+      labels.forEach(({ el, object }) => {
+        object.getWorldPosition(tmp);
+        tmp.project(camera);
+        const x = (tmp.x * .5 + .5) * rect.width;
+        const y = (-tmp.y * .5 + .5) * rect.height;
+        el.style.transform = `translate(${x + 12}px, ${y - 16}px)`;
+        el.style.opacity = tmp.z < 1 ? "1" : "0";
+      });
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    };
+    tick();
+  </script>
+</body>
+</html>
