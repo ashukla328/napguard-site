@@ -1,32 +1,29 @@
-# NapGuard Concept Prototype
+# NapGuard Validation Landing Page
 
-This repository contains a visual product concept and basic 3D prototype for **NapGuard**, a nap-specific smart sleep mask concept.
+This repository contains a validation landing page and visual concept assets for **NapGuard**, a nap-specific smart sleep mask concept for people who accidentally oversleep short naps.
 
 ## Files
 
-- `index.html` - root entry point for static hosting.
-- `napguard-concept.html` - product mockup page with product description, labeled component diagram, interactive Three.js model, how-it-works section, and exploded layer concept.
+- `index.html` - polished validation landing page with product positioning, sensor layout, FAQ, and a localStorage waitlist form.
+- `napguard-concept.html` - earlier product concept page with an interactive Three.js model.
 - `outputs/napguard-model.scad` - simple OpenSCAD model for CAD-style geometry exploration.
 - `vercel.json` - minimal Vercel static-site settings.
 
-## View the web prototype
+## View the landing page
 
-Option 1: open `napguard-concept.html` directly in a browser.
+Open `index.html` directly in a browser. The landing page is static and stores waitlist submissions in browser localStorage under `napguardWaitlist`.
 
-Option 2: serve this folder locally:
+## Vercel deployment settings
 
-```powershell
-cd C:\Users\shukl\Documents\Codex\2026-06-16\i-want-you-to-create-a
-python -m http.server 8000
-```
+Use these settings in Vercel:
 
-Then open:
+- Framework Preset: Other
+- Root Directory: `.`
+- Build Command: empty / none
+- Install Command: empty / none
+- Output Directory: `.`
 
-```text
-http://localhost:8000/
-```
-
-The web prototype imports Three.js from a CDN, so the interactive model needs internet access the first time it loads.
+This project does not use Next.js, Vite, Node, serverless functions, rewrites, localhost proxying, or a build step. Vercel should serve `index.html` directly from the repository root.
 
 ## View the OpenSCAD prototype
 
