@@ -745,6 +745,141 @@
       }
     }
 
+    .brand {
+      gap: 12px;
+      font-weight: 820;
+    }
+
+    .wordmark {
+      color: #fff8ee;
+      font-size: 15px;
+      letter-spacing: .015em;
+      line-height: 1;
+    }
+
+    .mark {
+      width: 46px;
+      height: 28px;
+      background: none;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      overflow: visible;
+      flex: 0 0 auto;
+    }
+
+    .mark::before,
+    .mark::after {
+      content: none;
+    }
+
+    .mark-shell {
+      fill: #27231f;
+      stroke: rgba(238, 219, 185, .42);
+      stroke-width: 1.2;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,.28));
+    }
+
+    .mark-bridge {
+      fill: #0f0e0d;
+      opacity: .84;
+    }
+
+    .mark-sensor {
+      fill: #90c8ba;
+      filter: drop-shadow(0 0 8px rgba(144,200,186,.32));
+    }
+
+    .visual-card {
+      isolation: isolate;
+    }
+
+    .visual-labels {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .product-label {
+      position: absolute;
+      max-width: 145px;
+      padding: 8px 10px;
+      border: 1px solid rgba(238, 219, 185, .16);
+      border-radius: 12px;
+      background: rgba(18, 17, 15, .68);
+      color: #e9ddcd;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.2);
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .product-label strong {
+      display: block;
+      color: #fff8ee;
+      margin-bottom: 2px;
+      font-size: 12px;
+    }
+
+    .product-label::after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 42px;
+      background: rgba(238,219,185,.34);
+    }
+
+    .product-label.sensors {
+      left: 7%;
+      top: 17%;
+    }
+
+    .product-label.sensors::after {
+      right: -40px;
+      top: 28px;
+      transform: rotate(13deg);
+      transform-origin: left;
+    }
+
+    .product-label.module {
+      right: 7%;
+      top: 21%;
+    }
+
+    .product-label.module::after {
+      left: -38px;
+      top: 31px;
+      transform: rotate(-16deg);
+      transform-origin: right;
+    }
+
+    .product-label.fabric {
+      left: 9%;
+      bottom: 24%;
+    }
+
+    .product-label.fabric::after {
+      right: -42px;
+      top: 20px;
+      transform: rotate(-10deg);
+      transform-origin: left;
+    }
+
+    @media (max-width: 720px) {
+      .visual-labels {
+        display: none;
+      }
+    }
+
+    .product-stage > .product-svg:not(.premium-mask) {
+      display: none;
+    }
+
+    .premium-mask {
+      display: block;
+    }
+
     /* Premium homepage refresh */
     body {
       background:
@@ -1600,21 +1735,143 @@
         border-bottom: 0;
       }
     }
+
+    .hero-capture {
+      margin-top: 22px;
+      max-width: 590px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid rgba(236, 220, 194, .14);
+      border-radius: 999px;
+      background: rgba(12, 13, 14, .52);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 18px 48px rgba(0,0,0,.16);
+    }
+
+    .hero-capture input {
+      min-height: 46px;
+      border: 0;
+      background: transparent;
+      padding: 0 10px 0 14px;
+    }
+
+    .hero-capture .submit {
+      min-height: 46px;
+      padding: 0 18px;
+      white-space: nowrap;
+    }
+
+    .micro-proof {
+      margin-top: 10px;
+      color: #958a7d;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .success {
+      border-color: rgba(128, 182, 168, .46);
+      background:
+        linear-gradient(145deg, rgba(128, 182, 168, .16), rgba(255,255,255,.045));
+      color: #e1f2ed;
+      box-shadow: 0 14px 36px rgba(0,0,0,.14);
+    }
+
+    .success strong {
+      display: block;
+      color: #fff8ee;
+      margin-bottom: 3px;
+    }
+
+    .hero-success {
+      max-width: 590px;
+      margin-top: 12px;
+    }
+
+    .test-group-note {
+      margin: 0 0 18px;
+      color: #d8c8b5;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .backend-note {
+      margin-top: 13px;
+      color: #958a7d;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .final-cta {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .final-cta-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      align-items: center;
+      padding: clamp(28px, 5vw, 48px);
+      border: 1px solid rgba(214,168,95,.28);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 82% 20%, rgba(214,168,95,.16), transparent 34%),
+        linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+      box-shadow: 0 28px 86px rgba(0,0,0,.24);
+    }
+
+    .final-cta-panel h2 {
+      margin-bottom: 10px;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+    }
+
+    .final-cta-panel p {
+      max-width: 650px;
+      margin: 0;
+      color: #b8aea2;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 720px) {
+      .hero-capture,
+      .final-cta-panel {
+        grid-template-columns: 1fr;
+        border-radius: 22px;
+      }
+
+      .hero-capture {
+        padding: 12px;
+      }
+
+      .hero-capture .submit,
+      .final-cta-panel .btn {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <header class="topbar">
     <div class="shell nav">
       <a class="brand" href="#top" aria-label="NapGuard home">
-        <span class="mark" aria-hidden="true"></span>
-        <span>NapGuard</span>
+        <svg class="mark" viewBox="0 0 56 32" aria-hidden="true">
+          <path class="mark-shell" d="M5 18 C9 7 21 5 28 12 C35 5 47 7 51 18 C47 27 35 28 28 21 C21 28 9 27 5 18 Z"/>
+          <path class="mark-bridge" d="M22 21 C24 18 26 17 28 17 C30 17 32 18 34 21 C32 24 30 25 28 25 C26 25 24 24 22 21 Z"/>
+          <circle class="mark-sensor" cx="38" cy="12" r="2.2"/>
+        </svg>
+        <span class="wordmark">NapGuard</span>
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#problem">Problem</a>
         <a href="#how">How it works</a>
         <a href="#layout">Sensor layout</a>
         <a href="#faq">FAQ</a>
-        <a class="nav-cta" href="#waitlist">Join waitlist</a>
+        <a class="nav-cta" href="#waitlist">Join test group</a>
       </nav>
     </div>
   </header>
@@ -1627,9 +1884,20 @@
         <p class="hero-sub">NapGuard starts the nap timer after likely sleep onset, then wakes you with a quiet haptic cue before a short reset becomes a lost afternoon.</p>
         <p class="support">A soft mask for controlled naps. No bulky headband. No full-night sleep dashboard.</p>
         <div class="actions">
-          <a class="btn primary" href="#waitlist">Join the waitlist</a>
+          <a class="btn primary" href="#waitlist">Stop my 3-hour naps</a>
           <a class="btn secondary" href="#how">See how it works</a>
         </div>
+        <!-- Backend options for this hero capture:
+             Formspree: add action="https://formspree.io/f/FORM_ID" method="POST".
+             Google Forms: replace the form action with your Google Forms formResponse URL and map the email input name.
+             Supabase: replace the JS submit handler below with supabase.from("waitlist").insert(entry).
+             Tally: replace this mini form with a Tally embed or link if you want hosted validation analytics. -->
+        <form class="hero-capture waitlist-capture" data-source="hero-mini">
+          <input type="email" name="email" autocomplete="email" placeholder="Email for the first test group" aria-label="Email for the first test group" required />
+          <button class="submit" type="submit">Join the early test group</button>
+        </form>
+        <div class="micro-proof">For people whose “quick nap” keeps turning into a 2-3 hour sleep.</div>
+        <div class="success hero-success" id="hero-success-message" role="status" aria-live="polite"></div>
         <div class="metric-row" aria-label="NapGuard positioning">
           <div class="metric"><strong>Nap-first</strong><span>Built for short resets</span></div>
           <div class="metric"><strong>Soft mask</strong><span>Hidden low-profile sensing</span></div>
@@ -1639,93 +1907,93 @@
 
       <div class="visual-card" aria-label="NapGuard product visual">
         <div class="product-stage">
-          <svg class="product-svg" viewBox="0 0 720 520" role="img" aria-labelledby="hero-visual-title hero-visual-desc">
-            <title id="hero-visual-title">NapGuard smart nap mask</title>
-            <desc id="hero-visual-desc">A premium sleep mask with soft fabric shell, cushion, elastic strap, small smart module, and hidden sensors.</desc>
-            <defs>
-              <linearGradient id="heroMask" x1="0" x2="1">
-                <stop offset="0" stop-color="#211f1d"/>
-                <stop offset=".48" stop-color="#48423b"/>
-                <stop offset="1" stop-color="#24211f"/>
-              </linearGradient>
-              <filter id="heroShadow" x="-20%" y="-20%" width="140%" height="150%">
-                <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#000" flood-opacity=".35"/>
-              </filter>
-            </defs>
-            <path d="M70 260 C104 174 197 125 301 139 C330 143 347 160 360 160 C373 160 390 143 419 139 C523 125 616 174 650 260 C616 348 523 386 420 356 C389 347 374 324 360 324 C346 324 331 347 300 356 C197 386 104 348 70 260 Z" fill="url(#heroMask)" filter="url(#heroShadow)"/>
-            <path d="M93 260 C132 205 205 177 299 188 C333 192 344 213 360 213 C376 213 387 192 421 188 C515 177 588 205 627 260 C587 318 510 338 426 313 C389 302 376 282 360 282 C344 282 331 302 294 313 C210 338 133 318 93 260 Z" fill="#c9b9a5" opacity=".92"/>
-            <path d="M303 320 C327 295 343 286 360 286 C377 286 393 295 417 320 C396 344 379 352 360 352 C341 352 324 344 303 320 Z" fill="#131211" opacity=".72"/>
-            <path d="M62 253 C18 236 -33 238 -96 257" fill="none" stroke="#34302b" stroke-width="30" stroke-linecap="round"/>
-            <path d="M658 253 C702 236 753 238 816 257" fill="none" stroke="#34302b" stroke-width="30" stroke-linecap="round"/>
-            <rect x="314" y="115" width="92" height="50" rx="18" fill="#d6a85f"/>
-            <circle cx="387" cy="129" r="5" fill="#80b6a8"/>
-            <rect x="332" y="132" width="34" height="8" rx="4" fill="#141414" opacity=".58"/>
-            <g fill="#80b6a8">
-              <rect x="214" y="158" width="58" height="14" rx="7"/>
-              <rect x="287" y="169" width="50" height="14" rx="7"/>
-              <rect x="383" y="169" width="50" height="14" rx="7"/>
-              <rect x="448" y="158" width="58" height="14" rx="7"/>
-            </g>
-            <ellipse cx="206" cy="260" rx="29" ry="38" fill="#cc7c62"/>
-            <ellipse cx="514" cy="260" rx="29" ry="38" fill="#cc7c62"/>
-            <rect x="493" y="202" width="52" height="14" rx="7" fill="#151515"/>
-            <rect x="497" y="206" width="28" height="5" rx="2.5" fill="#c9b9a5"/>
-            <rect x="249" y="348" width="68" height="18" rx="9" fill="#a599d6"/>
-            <g stroke="#988a7a" stroke-width="4" stroke-linecap="round">
-              <path d="M168 336 C197 354 235 361 278 358"/>
-              <path d="M442 358 C485 361 523 354 552 336"/>
-            </g>
-          </svg>
-          <svg class="product-svg premium-mask" viewBox="0 0 760 540" role="img" aria-labelledby="premium-visual-title premium-visual-desc">
+          <svg class="product-svg premium-mask" viewBox="0 0 760 520" role="img" aria-labelledby="premium-visual-title premium-visual-desc">
             <title id="premium-visual-title">NapGuard premium smart nap mask</title>
-            <desc id="premium-visual-desc">A soft premium sleep mask with fabric texture, cushion, strap, shallow electronics module, hidden sensors, haptic motor, and timer animation.</desc>
+            <desc id="premium-visual-desc">A slim fabric smart nap mask with tapered strap, cushioned eye area, hidden sensors, shallow side electronics, charging port, venting, and exploded material layers.</desc>
             <defs>
-              <linearGradient id="premiumMaskBody" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#151413"/>
-                <stop offset=".28" stop-color="#3d3832"/>
-                <stop offset=".58" stop-color="#5b5147"/>
-                <stop offset="1" stop-color="#1b1917"/>
+              <linearGradient id="softShell" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#171513"/>
+                <stop offset=".28" stop-color="#38332e"/>
+                <stop offset=".62" stop-color="#5b5147"/>
+                <stop offset="1" stop-color="#191715"/>
               </linearGradient>
-              <linearGradient id="premiumCushion" x1="0" x2="1">
-                <stop offset="0" stop-color="#a89782"/>
-                <stop offset=".48" stop-color="#dbcab4"/>
-                <stop offset="1" stop-color="#9f8f7e"/>
+              <linearGradient id="edgeLight" x1="0" x2="1">
+                <stop offset="0" stop-color="#7b7065"/>
+                <stop offset=".45" stop-color="#f1dfc5"/>
+                <stop offset="1" stop-color="#75695d"/>
               </linearGradient>
-              <linearGradient id="premiumGold" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#f0cf94"/>
-                <stop offset=".5" stop-color="#ba8843"/>
-                <stop offset="1" stop-color="#6b4f2c"/>
+              <linearGradient id="cushionSoft" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#806f5f"/>
+                <stop offset=".35" stop-color="#d4c2ab"/>
+                <stop offset=".72" stop-color="#f0dfc8"/>
+                <stop offset="1" stop-color="#9f8d7a"/>
               </linearGradient>
-              <filter id="premiumShadow" x="-25%" y="-30%" width="150%" height="170%">
-                <feDropShadow dx="0" dy="28" stdDeviation="24" flood-color="#000" flood-opacity=".38"/>
+              <linearGradient id="sideModule" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#e4c17f"/>
+                <stop offset=".45" stop-color="#a87839"/>
+                <stop offset="1" stop-color="#46321d"/>
+              </linearGradient>
+              <pattern id="woven" width="8" height="8" patternUnits="userSpaceOnUse">
+                <path d="M0 1 H8 M1 0 V8" stroke="#fff5e7" stroke-width=".35" opacity=".18"/>
+                <path d="M0 6 H8 M6 0 V8" stroke="#000" stroke-width=".35" opacity=".2"/>
+              </pattern>
+              <filter id="productDepth" x="-25%" y="-35%" width="150%" height="180%">
+                <feDropShadow dx="0" dy="28" stdDeviation="22" flood-color="#000" flood-opacity=".38"/>
               </filter>
             </defs>
-            <ellipse cx="378" cy="410" rx="258" ry="34" fill="#000" opacity=".24"/>
-            <path d="M72 270 C98 165 197 105 319 120 C353 124 369 145 380 145 C391 145 407 124 441 120 C563 105 662 165 688 270 C662 370 558 412 437 378 C407 370 393 348 380 348 C367 348 353 370 323 378 C202 412 98 370 72 270 Z" fill="url(#premiumMaskBody)" filter="url(#premiumShadow)"/>
-            <path d="M98 270 C139 204 214 171 319 184 C354 188 366 208 380 208 C394 208 406 188 441 184 C546 171 621 204 662 270 C617 335 533 358 443 330 C407 319 394 300 380 300 C366 300 353 319 317 330 C227 358 143 335 98 270 Z" fill="url(#premiumCushion)" opacity=".94"/>
-            <path d="M127 260 C162 210 225 187 304 198 C342 203 356 224 380 224 C404 224 418 203 456 198 C535 187 598 210 633 260" fill="none" stroke="#efe0cc" stroke-width="2" opacity=".22"/>
-            <path d="M306 326 C331 300 354 291 380 291 C406 291 429 300 454 326 C431 354 407 365 380 365 C353 365 329 354 306 326 Z" fill="#11100f" opacity=".74"/>
-            <path d="M70 263 C23 244 -36 247 -110 271" fill="none" stroke="#342f2a" stroke-width="32" stroke-linecap="round"/>
-            <path d="M690 263 C737 244 796 247 870 271" fill="none" stroke="#342f2a" stroke-width="32" stroke-linecap="round"/>
-            <path class="stitch" d="M124 214 C179 173 248 156 319 164 C354 168 367 184 380 184 C393 184 406 168 441 164 C512 156 581 173 636 214" fill="none" stroke="#f2e2cc" stroke-width="2" opacity=".34"/>
-            <g class="sensor-pulse" fill="#80b6a8">
-              <rect x="226" y="154" width="62" height="12" rx="6"/>
-              <rect x="305" y="165" width="54" height="12" rx="6"/>
-              <rect x="401" y="165" width="54" height="12" rx="6"/>
-              <rect x="472" y="154" width="62" height="12" rx="6"/>
+
+            <ellipse cx="382" cy="382" rx="254" ry="28" fill="#000" opacity=".25"/>
+            <path d="M92 260 C28 244 -32 249 -116 282" fill="none" stroke="#2f2a25" stroke-width="28" stroke-linecap="round"/>
+            <path d="M651 247 C713 226 776 231 854 260" fill="none" stroke="#2f2a25" stroke-width="28" stroke-linecap="round"/>
+            <path d="M88 252 C28 236 -30 242 -110 272" fill="none" stroke="#5f554b" stroke-width="6" stroke-linecap="round" opacity=".34"/>
+            <path d="M649 239 C711 220 770 224 846 252" fill="none" stroke="#5f554b" stroke-width="6" stroke-linecap="round" opacity=".34"/>
+
+            <g filter="url(#productDepth)" transform="rotate(-4 380 250)">
+              <path d="M73 252 C101 166 204 125 325 139 C356 143 371 160 382 160 C393 160 408 143 439 139 C560 125 663 166 691 252 C660 329 555 363 441 336 C410 329 395 310 382 310 C369 310 354 329 323 336 C209 363 104 329 73 252 Z" fill="url(#softShell)"/>
+              <path d="M82 250 C123 187 208 159 326 171 C358 174 371 191 382 191 C393 191 406 174 438 171 C556 159 641 187 682 250" fill="none" stroke="url(#edgeLight)" stroke-width="5" opacity=".38"/>
+              <path d="M93 256 C137 208 213 188 316 200 C355 205 369 221 382 221 C395 221 409 205 448 200 C551 188 627 208 671 256 C626 306 545 319 454 298 C414 289 397 272 382 272 C367 272 350 289 310 298 C219 319 138 306 93 256 Z" fill="url(#cushionSoft)" opacity=".96"/>
+              <path d="M96 252 C140 213 219 196 315 207 C353 211 369 230 382 230 C395 230 411 211 449 207 C545 196 624 213 668 252" fill="none" stroke="#fff2dc" stroke-width="1.4" opacity=".36"/>
+              <path d="M315 296 C339 276 363 268 382 268 C401 268 425 276 449 296 C430 319 407 329 382 329 C357 329 334 319 315 296 Z" fill="#11100f" opacity=".72"/>
+              <path d="M103 250 C147 181 233 151 326 160 C357 163 371 178 382 178 C393 178 407 163 438 160 C531 151 617 181 661 250" fill="none" stroke="#e7d3b7" stroke-width="2" class="stitch" opacity=".5"/>
+              <path d="M157 297 C191 312 233 318 278 314 M486 314 C532 318 573 312 607 297" fill="none" stroke="#6e6155" stroke-width="4" stroke-linecap="round" opacity=".65"/>
+              <path d="M176 307 C204 318 235 322 269 319 M496 319 C531 322 562 318 590 307" fill="none" stroke="#eadcc8" stroke-width="1.5" stroke-linecap="round" opacity=".32"/>
+              <g fill="url(#woven)" opacity=".72">
+                <path d="M73 252 C101 166 204 125 325 139 C356 143 371 160 382 160 C393 160 408 143 439 139 C560 125 663 166 691 252 C660 329 555 363 441 336 C410 329 395 310 382 310 C369 310 354 329 323 336 C209 363 104 329 73 252 Z"/>
+              </g>
+
+              <g class="sensor-pulse" opacity=".78">
+                <rect x="247" y="168" width="45" height="8" rx="4" fill="#86c4b5"/>
+                <rect x="318" y="179" width="38" height="8" rx="4" fill="#86c4b5"/>
+                <rect x="408" y="179" width="38" height="8" rx="4" fill="#86c4b5"/>
+                <rect x="472" y="168" width="45" height="8" rx="4" fill="#86c4b5"/>
+              </g>
+              <path d="M197 253 C203 231 221 219 239 225 C253 230 257 251 247 268 C236 287 209 281 200 263 Z" fill="#c97860" opacity=".76"/>
+              <path d="M567 253 C561 231 543 219 525 225 C511 230 507 251 517 268 C528 287 555 281 564 263 Z" fill="#c97860" opacity=".76"/>
+
+              <g transform="translate(610 202)">
+                <rect x="-7" y="-28" width="78" height="50" rx="17" fill="url(#sideModule)"/>
+                <rect x="4" y="-13" width="32" height="6" rx="3" fill="#151311" opacity=".62"/>
+                <circle cx="50" cy="-11" r="4" fill="#8fd0c0"/>
+                <rect x="38" y="17" width="27" height="5" rx="2.5" fill="#191613"/>
+                <rect x="42" y="18.5" width="13" height="2" rx="1" fill="#d8c3a7"/>
+              </g>
+
+              <rect x="273" y="319" width="58" height="13" rx="6.5" fill="#9d8dd0" opacity=".9"/>
             </g>
-            <ellipse class="sensor-pulse" cx="211" cy="267" rx="27" ry="38" fill="#c97860" opacity=".92"/>
-            <ellipse class="sensor-pulse" cx="549" cy="267" rx="27" ry="38" fill="#c97860" opacity=".92"/>
-            <rect x="326" y="105" width="108" height="54" rx="19" fill="url(#premiumGold)"/>
-            <rect x="346" y="121" width="44" height="8" rx="4" fill="#151311" opacity=".64"/>
-            <circle cx="411" cy="123" r="5" fill="#80b6a8"/>
-            <rect x="512" y="205" width="58" height="14" rx="7" fill="#11100f"/>
-            <rect x="518" y="209" width="30" height="5" rx="2.5" fill="#c9b9a5"/>
-            <rect x="266" y="354" width="72" height="18" rx="9" fill="#a599d6"/>
-            <circle cx="606" cy="112" r="27" fill="none" stroke="#ead4a5" stroke-width="3" opacity=".2"/>
-            <circle class="timer-ring" cx="606" cy="112" r="21" fill="none" stroke="#e5bd76" stroke-width="4" stroke-linecap="round"/>
-            <text x="606" y="118" text-anchor="middle" font-family="Inter, Manrope, sans-serif" font-size="15" font-weight="800" fill="#f7f1e8">20</text>
+
+            <g transform="translate(555 326)">
+              <rect x="0" y="0" width="124" height="8" rx="4" fill="#2f2a25"/>
+              <rect x="12" y="18" width="98" height="7" rx="3.5" fill="#86c4b5" opacity=".82"/>
+              <rect x="24" y="35" width="78" height="10" rx="5" fill="#a87839"/>
+              <rect x="6" y="56" width="116" height="14" rx="7" fill="#d4c2ab"/>
+              <text x="0" y="-10" font-family="Inter, Manrope, sans-serif" font-size="11" font-weight="750" fill="#d8c8b5">layered soft build</text>
+            </g>
           </svg>
+        </div>
+        <div class="visual-labels" aria-hidden="true">
+          <div class="product-label sensors"><strong>Hidden sensors</strong>Soft pads sit under the upper edge.</div>
+          <div class="product-label module"><strong>Thin smart pod</strong>Battery, Bluetooth, motion, charging.</div>
+          <div class="product-label fabric"><strong>Breathable cushion</strong>Vented foam and woven shell.</div>
         </div>
         <div class="floating-note">
           <div>
@@ -1915,8 +2183,8 @@
       <div class="shell waitlist">
         <div>
           <div class="section-head">
-            <h2>Would you pay for a nap you can trust?</h2>
-            <p class="lead">We are validating whether controlled naps are painful enough for a dedicated device. If oversleeping has cost you a class, workout, evening, or sleep schedule, your feedback matters.</p>
+            <h2>Do your naps turn into accidental 3-hour sleeps?</h2>
+            <p class="lead">Join the first NapGuard test group. We are looking for students, travelers, shift workers, and busy people who want short naps without losing the rest of the day.</p>
             <ul class="promise-list">
               <li>Designed around a likely $99-$199 consumer hardware price range.</li>
               <li>Focused on one job: stop accidental multi-hour naps.</li>
@@ -1929,11 +2197,14 @@
           </article>
         </div>
         <div class="card form-card">
-          <h3>Join the NapGuard waitlist</h3>
-          <!-- Formspree: add action="https://formspree.io/f/FORM_ID" method="POST" to this form. -->
-          <!-- Supabase: replace the submit handler with an insert into a waitlist table. -->
-          <!-- Tally: embed or link a Tally form here if you want hosted validation analytics. -->
-          <form id="waitlist-form">
+          <h3>Join the first test group</h3>
+          <p class="test-group-note">Tell us how often naps get away from you. We will use this to prioritize early testers and product interviews.</p>
+          <!-- Backend options for this main waitlist:
+               Formspree: add action="https://formspree.io/f/FORM_ID" method="POST" to this form.
+               Google Forms: replace the form action with your Google Forms formResponse URL and map each field name.
+               Supabase: replace the localStorage submit handler below with supabase.from("waitlist").insert(entry).
+               Tally: replace this form with an embedded Tally form if you want hosted analytics and follow-up workflows. -->
+          <form id="waitlist-form" class="waitlist-capture" data-source="main-waitlist">
             <label>
               Email
               <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
@@ -1963,9 +2234,10 @@
               What happens when you oversleep?
               <textarea name="story" placeholder="Optional: groggy for hours, missed class, ruined sleep schedule..."></textarea>
             </label>
-            <button class="submit" type="submit">Request early access</button>
+            <button class="submit" type="submit">Join the early test group</button>
           </form>
           <div class="success" id="success-message" role="status" aria-live="polite"></div>
+          <p class="backend-note">Prototype note: submissions are stored locally in this browser for now. Connect Formspree, Tally, Supabase, or Google Forms before running real traffic.</p>
         </div>
       </div>
     </section>
@@ -2004,6 +2276,16 @@
         </div>
       </div>
     </section>
+
+    <section class="final-cta" aria-labelledby="final-cta-title">
+      <div class="shell final-cta-panel">
+        <div>
+          <h2 id="final-cta-title">Stop letting one nap steal the whole day.</h2>
+          <p>If short naps keep turning into accidental 3-hour sleeps, join the early test group and help shape NapGuard before launch.</p>
+        </div>
+        <a class="btn primary" href="#waitlist">Join the early test group</a>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -2014,22 +2296,34 @@
   </footer>
 
   <script>
-    const form = document.querySelector("#waitlist-form");
-    const success = document.querySelector("#success-message");
+    const waitlistForms = document.querySelectorAll(".waitlist-capture");
 
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      const entry = {
-        ...data,
-        submittedAt: new Date().toISOString()
-      };
-      const existing = JSON.parse(localStorage.getItem("napguardWaitlist") || "[]");
-      existing.push(entry);
-      localStorage.setItem("napguardWaitlist", JSON.stringify(existing));
-      form.reset();
-      success.textContent = "You are on the NapGuard waitlist. Thanks for helping validate the nap-oversleep problem.";
-      success.classList.add("show");
+    waitlistForms.forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        const entry = {
+          ...data,
+          source: form.dataset.source || "waitlist",
+          submittedAt: new Date().toISOString()
+        };
+
+        // Static prototype storage. Replace this block when connecting a real backend:
+        // Formspree: remove event.preventDefault(), add form action/method, and let the browser POST.
+        // Google Forms: POST the mapped fields to your formResponse endpoint.
+        // Supabase: await supabase.from("waitlist").insert(entry).
+        // Tally: replace the form with an embedded Tally form and remove this handler.
+        const existing = JSON.parse(localStorage.getItem("napguardWaitlist") || "[]");
+        existing.push(entry);
+        localStorage.setItem("napguardWaitlist", JSON.stringify(existing));
+
+        form.reset();
+        const success = form.id === "waitlist-form"
+          ? document.querySelector("#success-message")
+          : document.querySelector("#hero-success-message");
+        success.innerHTML = "<strong>You are on the early test list.</strong> We saved your signup locally for this prototype. Next step: connect a real form backend before sharing widely.";
+        success.classList.add("show");
+      });
     });
   </script>
 </body>
