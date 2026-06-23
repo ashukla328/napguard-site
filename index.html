@@ -3,8 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NapGuard | Controlled Naps Without Oversleeping</title>
-  <meta name="description" content="NapGuard is a nap-specific smart sleep mask that starts timing after likely sleep onset and wakes you with gentle haptics before a short nap turns into hours." />
+  <title>NapGuard | Smart Nap Mask for Short Naps That Stay Short</title>
+  <meta name="description" content="NapGuard is a static concept landing page for a nap-specific smart mask that starts timing after likely sleep onset and wakes you gently before a short nap becomes hours." />
+  <meta name="theme-color" content="#10100f" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NapGuard" />
+  <meta property="og:title" content="NapGuard | Short naps that stay short" />
+  <meta property="og:description" content="A premium smart nap mask concept built around likely sleep onset, gentle haptics, and honest boundaries." />
+  <meta property="og:image" content="napguard-social-card.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NapGuard | Short naps that stay short" />
+  <meta name="twitter:description" content="A nap-specific smart mask concept for people whose quick naps turn into lost afternoons." />
+  <meta name="twitter:image" content="napguard-social-card.svg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2310100f'/%3E%3Cpath d='M11 34C15 20 26 18 32 27C38 18 49 20 53 34C49 45 38 47 32 38C26 47 15 45 11 34Z' fill='%23332d27' stroke='%23d6a85f' stroke-width='2'/%3E%3Ccircle cx='42' cy='27' r='3' fill='%2380b6a8'/%3E%3C/svg%3E" />
   <style>
     :root {
       color-scheme: dark;
@@ -37,6 +49,43 @@
       color: var(--ink);
     }
 
+    :focus-visible {
+      outline: 3px solid rgba(214, 168, 95, .82);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      left: 18px;
+      top: 14px;
+      z-index: 100;
+      transform: translateY(-140%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #f0cf93;
+      color: #16130f;
+      font-weight: 820;
+      text-decoration: none;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .28);
+      transition: transform .16s ease;
+    }
+
+    .skip-link:focus-visible {
+      transform: translateY(0);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     body {
       margin: 0;
       min-width: 320px;
@@ -48,6 +97,13 @@
     }
 
     a { color: inherit; }
+
+    button,
+    input,
+    select,
+    textarea {
+      min-width: 0;
+    }
 
     .shell {
       width: min(1160px, calc(100% - 40px));
@@ -1123,145 +1179,6 @@
       color: #ada397;
     }
 
-    .problem-narrative {
-      display: grid;
-      grid-template-columns: minmax(280px, .86fr) minmax(0, 1.14fr);
-      gap: clamp(24px, 4vw, 48px);
-      align-items: center;
-    }
-
-    .story-panel {
-      position: relative;
-      padding: clamp(28px, 5vw, 48px);
-      border: 1px solid rgba(236, 220, 194, .14);
-      border-radius: 28px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.035)),
-        rgba(255,255,255,.035);
-      box-shadow: 0 28px 80px rgba(0,0,0,.25);
-      overflow: hidden;
-    }
-
-    .story-panel::before {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      right: -58px;
-      top: -58px;
-      border-radius: 50%;
-      background: rgba(204, 124, 98, .13);
-    }
-
-    .story-kicker,
-    .form-kicker {
-      display: inline-flex;
-      margin-bottom: 18px;
-      color: #dac9b4;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .story-panel h3 {
-      position: relative;
-      margin-bottom: 16px;
-      max-width: 480px;
-      font-size: clamp(1.75rem, 3vw, 2.65rem);
-      line-height: 1.06;
-      color: #fff8ee;
-      text-wrap: balance;
-    }
-
-    .story-panel p {
-      position: relative;
-      max-width: 520px;
-      color: #b9aea1;
-      line-height: 1.62;
-      font-size: 16px;
-    }
-
-    .pain-list {
-      display: grid;
-      gap: 0;
-      border-top: 1px solid rgba(255,255,255,.1);
-    }
-
-    .pain-row {
-      display: grid;
-      grid-template-columns: 70px 1fr;
-      gap: 18px;
-      padding: 21px 0;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-
-    .pain-time {
-      color: var(--warm);
-      font-weight: 820;
-      font-size: 15px;
-    }
-
-    .pain-row strong {
-      display: block;
-      margin-bottom: 5px;
-      color: #fff8ee;
-      font-size: 18px;
-    }
-
-    .pain-row span {
-      color: #ada397;
-      line-height: 1.5;
-    }
-
-    .nap-flow {
-      position: relative;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0;
-      border: 1px solid rgba(236, 220, 194, .14);
-      border-radius: 28px;
-      overflow: hidden;
-      background:
-        linear-gradient(90deg, rgba(128,182,168,.12), rgba(214,168,95,.1)),
-        rgba(255,255,255,.035);
-      box-shadow: 0 24px 70px rgba(0,0,0,.2);
-    }
-
-    .flow-step {
-      min-height: 245px;
-      padding: 26px;
-      border-right: 1px solid rgba(255,255,255,.1);
-    }
-
-    .flow-step:last-child {
-      border-right: 0;
-    }
-
-    .flow-number {
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 26px;
-      border-radius: 50%;
-      color: #17130f;
-      background: linear-gradient(180deg, #efd19a, #c79142);
-      font-weight: 850;
-      box-shadow: 0 12px 28px rgba(214,168,95,.22);
-    }
-
-    .flow-step h3 {
-      margin-bottom: 10px;
-      color: #fff8ee;
-      font-size: 20px;
-    }
-
-    .flow-step p {
-      color: #b8aea2;
-      line-height: 1.55;
-    }
-
     .layout-wrap {
       grid-template-columns: minmax(360px, 1.15fr) minmax(300px, .85fr);
     }
@@ -1283,68 +1200,6 @@
       transform: translateX(4px);
       background: rgba(255,255,255,.07);
       border-color: rgba(236,220,194,.18);
-    }
-
-    .comparison-board {
-      display: grid;
-      grid-template-columns: .92fr 1.16fr .92fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    .compare-column {
-      padding: 24px;
-      border: 1px solid rgba(236,220,194,.12);
-      border-radius: 24px;
-      background: rgba(255,255,255,.038);
-    }
-
-    .compare-column.featured {
-      border-color: rgba(214,168,95,.34);
-      background:
-        linear-gradient(180deg, rgba(214,168,95,.13), rgba(255,255,255,.05)),
-        rgba(255,255,255,.05);
-      box-shadow: 0 24px 74px rgba(0,0,0,.22);
-    }
-
-    .compare-column h3 {
-      margin-bottom: 16px;
-      color: #fff8ee;
-      font-size: 22px;
-    }
-
-    .compare-column ul {
-      display: grid;
-      gap: 14px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .compare-column li {
-      color: #b8aea2;
-      line-height: 1.5;
-    }
-
-    .sleep-line {
-      height: 82px;
-      margin: 4px 0 20px;
-      border-radius: 18px;
-      background:
-        linear-gradient(90deg, rgba(204,124,98,.24) 0 34%, rgba(214,168,95,.28) 34% 72%, rgba(128,182,168,.24) 72% 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sleep-line::after {
-      content: "";
-      position: absolute;
-      left: 12%;
-      right: 10%;
-      top: 38px;
-      height: 2px;
-      background: rgba(255,248,238,.55);
-      transform: skewX(-18deg);
     }
 
     .waitlist {
@@ -1452,29 +1307,34 @@
       }
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+
+      .product-svg,
+      .visual-card:hover .product-svg,
+      .problem-card:hover,
+      .diff-card:hover,
+      .legend-item:hover,
+      .btn:hover {
+        transform: none;
+      }
+    }
+
     @media (max-width: 980px) {
       .hero {
         max-width: none;
         grid-template-columns: 1fr;
       }
 
-      .problem-narrative,
-      .comparison-board,
       .waitlist {
         grid-template-columns: 1fr;
-      }
-
-      .nap-flow {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .flow-step:nth-child(2) {
-        border-right: 0;
-      }
-
-      .flow-step:nth-child(1),
-      .flow-step:nth-child(2) {
-        border-bottom: 1px solid rgba(255,255,255,.1);
       }
 
       .faq-grid {
@@ -1504,28 +1364,8 @@
         padding: 13px;
       }
 
-      .pain-row {
-        grid-template-columns: 1fr;
-        gap: 7px;
-      }
-
-      .nap-flow,
       .faq-grid {
         grid-template-columns: 1fr;
-      }
-
-      .flow-step {
-        min-height: 0;
-        border-right: 0;
-        border-bottom: 1px solid rgba(255,255,255,.1);
-      }
-
-      .flow-step:last-child {
-        border-bottom: 0;
-      }
-
-      .comparison-board {
-        gap: 10px;
       }
 
       .waitlist-copy,
@@ -1984,8 +1824,9 @@
     }
   </style>
 </head>
-<body>
-  <header class="topbar">
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="topbar" aria-label="Site header">
     <div class="shell nav">
       <a class="brand" href="#top" aria-label="NapGuard home">
         <svg class="mark" viewBox="0 0 56 32" aria-hidden="true">
@@ -2005,7 +1846,7 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="main" tabindex="-1">
     <section class="shell hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <div class="eyebrow">Nap-specific smart mask</div>
@@ -2020,12 +1861,14 @@
              Formspree: add action="https://formspree.io/f/FORM_ID" method="POST".
              Google Forms: replace the form action with your Google Forms formResponse URL and map the email input name.
              Supabase: replace the JS submit handler below with supabase.from("waitlist").insert(entry).
+             Airtable: POST to your Airtable automation/webhook endpoint from a serverless form provider.
              Tally: replace this mini form with a Tally embed or link if you want hosted validation analytics. -->
-        <form class="hero-capture waitlist-capture" data-source="hero-mini">
-          <input type="email" name="email" autocomplete="email" placeholder="Email for the first test group" aria-label="Email for the first test group" required />
+        <form class="hero-capture waitlist-capture" data-source="hero-mini" aria-describedby="hero-success-message">
+          <label class="sr-only" for="hero-email">Email for the first test group</label>
+          <input id="hero-email" type="email" name="email" autocomplete="email" placeholder="Email for the first test group" required />
           <button class="submit" type="submit">Join the early test group</button>
         </form>
-        <div class="micro-proof">For people whose “quick nap” keeps turning into a 2-3 hour sleep.</div>
+        <div class="micro-proof">For people whose "quick nap" keeps turning into a 2-3 hour sleep.</div>
         <div class="success hero-success" id="hero-success-message" role="status" aria-live="polite"></div>
         <div class="metric-row" aria-label="NapGuard positioning">
           <div class="metric"><strong>Nap-first</strong><span>Built for short resets</span></div>
@@ -2168,7 +2011,7 @@
               <span class="problem-status">Penalty</span>
             </div>
             <h3>You wake too soon.</h3>
-            <p>If it takes 15 minutes to fall asleep, your “20-minute nap” may become five minutes of actual rest.</p>
+            <p>If it takes 15 minutes to fall asleep, your "20-minute nap" may become five minutes of actual rest.</p>
             <div class="problem-meter" aria-hidden="true"><span></span></div>
             <span class="problem-metric">5 min actual rest</span>
           </article>
@@ -2353,8 +2196,9 @@
                Formspree: add action="https://formspree.io/f/FORM_ID" method="POST" to this form.
                Google Forms: replace the form action with your Google Forms formResponse URL and map each field name.
                Supabase: replace the localStorage submit handler below with supabase.from("waitlist").insert(entry).
+               Airtable: use a form backend or serverless endpoint to create Airtable records; do not expose API keys here.
                Tally: replace this form with an embedded Tally form if you want hosted analytics and follow-up workflows. -->
-          <form id="waitlist-form" class="waitlist-capture" data-source="main-waitlist">
+          <form id="waitlist-form" class="waitlist-capture" data-source="main-waitlist" aria-describedby="backend-note success-message">
             <label>
               Email
               <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
@@ -2387,7 +2231,7 @@
             <button class="submit" type="submit">Join the early test group</button>
           </form>
           <div class="success" id="success-message" role="status" aria-live="polite"></div>
-          <p class="backend-note">Prototype note: submissions are stored locally in this browser for now. Connect Formspree, Tally, Supabase, or Google Forms before running real traffic.</p>
+          <p class="backend-note" id="backend-note">Prototype note: submissions are stored locally in this browser for now. Connect Formspree, Tally, Supabase, Airtable, or Google Forms before running real traffic.</p>
         </div>
       </div>
     </section>
@@ -2446,7 +2290,21 @@
   </footer>
 
   <script>
+    const WAITLIST_STORAGE_KEY = "napguardWaitlist";
     const waitlistForms = document.querySelectorAll(".waitlist-capture");
+
+    function getStatusTarget(form) {
+      return form.id === "waitlist-form"
+        ? document.querySelector("#success-message")
+        : document.querySelector("#hero-success-message");
+    }
+
+    function setStatus(form, message) {
+      const target = getStatusTarget(form);
+      if (!target) return;
+      target.innerHTML = message;
+      target.classList.add("show");
+    }
 
     waitlistForms.forEach((form) => {
       form.addEventListener("submit", (event) => {
@@ -2458,21 +2316,29 @@
           submittedAt: new Date().toISOString()
         };
 
-        // Static prototype storage. Replace this block when connecting a real backend:
-        // Formspree: remove event.preventDefault(), add form action/method, and let the browser POST.
-        // Google Forms: POST the mapped fields to your formResponse endpoint.
-        // Supabase: await supabase.from("waitlist").insert(entry).
-        // Tally: replace the form with an embedded Tally form and remove this handler.
-        const existing = JSON.parse(localStorage.getItem("napguardWaitlist") || "[]");
-        existing.push(entry);
-        localStorage.setItem("napguardWaitlist", JSON.stringify(existing));
-
-        form.reset();
-        const success = form.id === "waitlist-form"
-          ? document.querySelector("#success-message")
-          : document.querySelector("#hero-success-message");
-        success.innerHTML = "<strong>You are on the early test list.</strong> We saved your signup locally for this prototype. Next step: connect a real form backend before sharing widely.";
-        success.classList.add("show");
+        /*
+          Static prototype storage only. Replace this block when connecting a real backend:
+          - Formspree: remove event.preventDefault(), add action/method, and let the browser POST.
+          - Tally: replace this form with a Tally embed or hosted form link.
+          - Google Forms: POST mapped fields to the formResponse endpoint.
+          - Supabase: await supabase.from("waitlist").insert(entry).
+          - Airtable: send the entry through a form backend or serverless endpoint; never expose API keys here.
+        */
+        try {
+          const existing = JSON.parse(localStorage.getItem(WAITLIST_STORAGE_KEY) || "[]");
+          existing.push(entry);
+          localStorage.setItem(WAITLIST_STORAGE_KEY, JSON.stringify(existing));
+          form.reset();
+          setStatus(
+            form,
+            "<strong>Prototype signup saved locally.</strong> This browser stored your response for validation testing. Connect Formspree, Tally, Google Forms, Supabase, or Airtable before driving real traffic."
+          );
+        } catch (error) {
+          setStatus(
+            form,
+            "<strong>We could not save this prototype signup.</strong> Your browser blocked local storage. Connect a real form backend before collecting live signups."
+          );
+        }
       });
     });
   </script>
