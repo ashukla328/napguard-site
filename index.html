@@ -4,17 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NapGuard | Smart Nap Mask for Short Naps That Stay Short</title>
-  <meta name="description" content="NapGuard is a nap-first smart mask concept that waits until you drift off, then wakes you gently before a quick reset becomes a lost afternoon." />
+  <meta name="description" content="NapGuard is a nap-first smart mask that waits until you drift off, then wakes you gently before a quick reset becomes a lost afternoon." />
   <meta name="theme-color" content="#10100f" />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NapGuard" />
   <meta property="og:title" content="NapGuard | Short naps that stay short" />
-  <meta property="og:description" content="A premium smart nap mask concept built around real rest, gentle haptics, and short naps that stay short." />
+  <meta property="og:description" content="A premium smart nap mask built around real rest, gentle wake-ups, and short naps that stay short." />
   <meta property="og:image" content="napguard-social-card.svg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="NapGuard | Short naps that stay short" />
-  <meta name="twitter:description" content="A nap-specific smart mask concept for people whose quick naps turn into lost afternoons." />
+  <meta name="twitter:description" content="A nap-specific smart mask for people whose quick naps turn into lost afternoons." />
   <meta name="twitter:image" content="napguard-social-card.svg" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2310100f'/%3E%3Cpath d='M11 34C15 20 26 18 32 27C38 18 49 20 53 34C49 45 38 47 32 38C26 47 15 45 11 34Z' fill='%23332d27' stroke='%23d6a85f' stroke-width='2'/%3E%3Ccircle cx='42' cy='27' r='3' fill='%2380b6a8'/%3E%3C/svg%3E" />
   <style>
@@ -152,6 +152,7 @@
     section {
       padding: clamp(62px, 9vw, 112px) 0;
       border-top: 1px solid var(--line-soft);
+      scroll-margin-top: 84px;
     }
 
     .section-head {
@@ -1348,8 +1349,8 @@
       <div class="hero-copy">
         <div class="eyebrow">Nap-specific smart mask</div>
         <h1 id="hero-title">You wanted a 20-minute nap. You woke up 3 hours later.</h1>
-        <p class="hero-sub">NapGuard waits until you actually drift off, then brings you back before a quick reset becomes a lost afternoon.</p>
-        <p class="support">A soft, nap-first mask - not a bulky headband or another sleep dashboard.</p>
+        <p class="hero-sub">NapGuard waits until you actually drift off, then wakes you before a quick reset becomes a lost afternoon.</p>
+        <p class="support">A soft, nap-first mask &mdash; not a bulky headband or another sleep dashboard.</p>
         <div class="actions">
           <a class="btn primary" href="#waitlist">Stop my 3-hour naps</a>
           <a class="btn secondary" href="#how">See how it works</a>
@@ -1463,7 +1464,7 @@
         <div class="floating-note">
           <div>
             <strong>Timer waits for real rest</strong>
-            <span>Your nap window starts after settling in, then a quiet cue brings you back.</span>
+            <span>Your nap window starts after settling in, then a quiet cue wakes you.</span>
           </div>
           <span class="status-pill">Nap mode ready</span>
         </div>
@@ -1659,7 +1660,7 @@
           <article class="card diff-card featured">
             <span class="tag">NapGuard</span>
             <h3>Timed from drift-off.</h3>
-            <p>A lower-friction consumer mask focused on actual rest and a quiet return.</p>
+            <p>A lower-friction consumer mask focused on actual rest and a quiet wake-up.</p>
           </article>
         </div>
       </div>
@@ -1720,7 +1721,7 @@
             <button class="submit" type="submit">Join early access</button>
           </form>
           <div class="success" id="success-message" role="status" aria-live="polite"></div>
-          <p class="backend-note" id="backend-note">Submissions are sent to Formspree when the endpoint is configured. A browser backup is kept after successful sends, and failed attempts are saved locally so the user can try again.</p>
+          <p class="backend-note" id="backend-note">We&rsquo;ll only use your email for NapGuard updates, product interviews, and early access invites.</p>
         </div>
       </div>
     </section>
@@ -1742,7 +1743,7 @@
           </article>
           <article class="card faq-card">
             <h3>Who is it for?</h3>
-            <p>Students, shift workers, travelers, founders, and anyone who wants a short reset without risking a three-hour accidental sleep.</p>
+            <p>Students, shift workers, travelers, busy teams, and anyone who wants a short reset without risking a three-hour accidental sleep.</p>
           </article>
           <article class="card faq-card">
             <h3>Is it a full-night sleep tracker?</h3>
@@ -1888,7 +1889,7 @@
           showMessage(
             messageTarget,
             "success",
-            "<strong>You are on the early access list.</strong> Thanks for joining NapGuard. We sent your signup and kept a local backup in this browser."
+            "<strong>You&rsquo;re in.</strong> We&rsquo;ll reach out as NapGuard moves toward early testing."
           );
         } catch (error) {
           const savedFailedAttempt = saveBackup(WAITLIST_FAILED_KEY, payload);

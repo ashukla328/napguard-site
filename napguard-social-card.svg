@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">NapGuard social preview</title>
+  <desc id="desc">Dark premium preview card for NapGuard, a smart nap mask for short naps that stay short.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10100f"/>
+      <stop offset=".48" stop-color="#1b1814"/>
+      <stop offset="1" stop-color="#0f1416"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1">
+      <stop offset="0" stop-color="#f0d49d"/>
+      <stop offset="1" stop-color="#b87d35"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="32" stdDeviation="28" flood-color="#000" flood-opacity=".38"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <path d="M0 110H1200M0 230H1200M0 350H1200M0 470H1200M170 0V630M390 0V630M610 0V630M830 0V630M1050 0V630" stroke="#fff" stroke-opacity=".035"/>
+  <circle cx="950" cy="120" r="250" fill="#80b6a8" opacity=".12"/>
+  <circle cx="170" cy="80" r="220" fill="#d6a85f" opacity=".12"/>
+  <g transform="translate(666 176)" filter="url(#shadow)">
+    <path d="M-10 138C20 48 126 5 248 20C281 24 301 41 319 41C337 41 357 24 390 20C512 5 618 48 648 138C616 219 508 253 394 225C358 216 340 198 319 198C298 198 280 216 244 225C130 253 22 219-10 138Z" fill="#3b352f" stroke="#d8c3a7" stroke-opacity=".38" stroke-width="4"/>
+    <path d="M12 138C62 84 148 64 248 76C287 81 302 100 319 100C336 100 351 81 390 76C490 64 576 84 626 138C574 191 490 205 398 182C360 173 340 156 319 156C298 156 278 173 240 182C148 205 64 191 12 138Z" fill="#cab8a2"/>
+    <path d="M254 184C278 160 300 151 319 151C338 151 360 160 384 184C365 208 344 219 319 219C294 219 273 208 254 184Z" fill="#11100f" opacity=".75"/>
+    <rect x="166" y="49" width="48" height="10" rx="5" fill="#80b6a8"/>
+    <rect x="258" y="62" width="42" height="10" rx="5" fill="#80b6a8"/>
+    <rect x="338" y="62" width="42" height="10" rx="5" fill="#80b6a8"/>
+    <rect x="424" y="49" width="48" height="10" rx="5" fill="#80b6a8"/>
+    <path d="M-6 136C-68 118-128 123-210 154" stroke="#2d2823" stroke-width="30" stroke-linecap="round"/>
+    <path d="M644 136C706 118 766 123 848 154" stroke="#2d2823" stroke-width="30" stroke-linecap="round"/>
+    <rect x="548" y="80" width="84" height="54" rx="18" fill="url(#gold)"/>
+  </g>
+  <g transform="translate(86 96)">
+    <text x="0" y="0" fill="#dac9b4" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="4">NAPGUARD</text>
+    <text x="0" y="118" fill="#fff8ee" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="78" font-weight="800">Short naps</text>
+    <text x="0" y="204" fill="#fff8ee" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="78" font-weight="800">that stay short.</text>
+    <text x="0" y="282" fill="#b8aea2" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30">A smart nap mask that starts</text>
+    <text x="0" y="324" fill="#b8aea2" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30">timing after you drift off.</text>
+    <rect x="0" y="394" width="288" height="54" rx="27" fill="url(#gold)"/>
+    <text x="30" y="430" fill="#17130f" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="800">Join early access</text>
+  </g>
+</svg>
