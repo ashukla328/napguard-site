@@ -12,7 +12,7 @@ This repository contains a validation landing page and visual concept assets for
 
 ## View the landing page
 
-Open `index.html` directly in a browser. The landing page is static and posts waitlist submissions to Formspree after you paste your public endpoint into `FORMSPREE_ENDPOINT` near the bottom of `index.html`. Successful submissions are backed up in browser localStorage under `napguardWaitlistBackup`; failed attempts are stored under `napguardWaitlistFailed`.
+Open `index.html` directly in a browser. The landing page is static and posts waitlist submissions to the configured Formspree endpoint in `FORMSPREE_ENDPOINT` near the bottom of `index.html`. Successful submissions are backed up in browser localStorage under `napguardWaitlistBackup`; failed attempts are stored under `napguardWaitlistFailed`.
 
 ## Vercel deployment settings
 
