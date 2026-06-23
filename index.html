@@ -1542,57 +1542,174 @@
       display: block;
     }
 
+    .problem-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      color: #e2c896;
+      font-size: 12px;
+      font-weight: 820;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .problem-kicker::before {
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(214,168,95,.85), rgba(204,124,98,.22));
+    }
+
     .problem-grid {
-      grid-template-columns: minmax(280px, .92fr) minmax(0, 1.08fr);
-      gap: clamp(20px, 4vw, 48px);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(14px, 1.8vw, 20px);
       align-items: stretch;
     }
 
     .problem-card {
-      min-height: 0;
-      border-radius: 0;
-      box-shadow: none;
-      background: transparent;
-      border: 0;
-      border-bottom: 1px solid rgba(236, 220, 194, .13);
-      padding: 22px 0;
-    }
-
-    .problem-card:first-child {
-      grid-row: span 4;
-      align-self: stretch;
-      padding: clamp(30px, 5vw, 50px);
+      position: relative;
+      min-width: 0;
+      min-height: 285px;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(22px, 2.4vw, 28px);
       border: 1px solid rgba(236, 220, 194, .14);
-      border-radius: 30px;
+      border-radius: 26px;
       background:
-        linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.035)),
-        rgba(255,255,255,.035);
-      box-shadow: 0 28px 84px rgba(0,0,0,.25);
+        linear-gradient(155deg, rgba(204,124,98,.13), rgba(255,255,255,.035) 52%, rgba(128,182,168,.055)),
+        rgba(255,255,255,.04);
+      box-shadow: 0 22px 70px rgba(0,0,0,.2);
+      overflow: hidden;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
     }
 
-    .problem-card:first-child .icon {
-      margin-bottom: 34px;
+    .problem-card:nth-child(1) {
+      --meter: 32%;
+      --meter-color: #d6a85f;
     }
 
-    .problem-card:first-child h3 {
-      max-width: 430px;
-      font-size: clamp(1.75rem, 3vw, 2.6rem);
-      line-height: 1.06;
+    .problem-card:nth-child(2) {
+      --meter: 62%;
+      --meter-color: #cc7c62;
+      border-color: rgba(204,124,98,.25);
+    }
+
+    .problem-card:nth-child(3) {
+      --meter: 18%;
+      --meter-color: #a599d6;
+    }
+
+    .problem-card:nth-child(4) {
+      --meter: 100%;
+      --meter-color: #d6a85f;
+      background:
+        linear-gradient(155deg, rgba(204,124,98,.16), rgba(255,255,255,.035) 48%, rgba(214,168,95,.07)),
+        rgba(255,255,255,.04);
+    }
+
+    .problem-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-top: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.055), transparent 44%);
+      pointer-events: none;
+    }
+
+    .problem-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(236,220,194,.22);
+      background:
+        linear-gradient(155deg, rgba(204,124,98,.16), rgba(255,255,255,.045) 52%, rgba(128,182,168,.07)),
+        rgba(255,255,255,.048);
+    }
+
+    .problem-card .icon,
+    .problem-top,
+    .problem-status,
+    .problem-card h3,
+    .problem-card p,
+    .problem-meter,
+    .problem-metric {
+      position: relative;
+    }
+
+    .problem-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .problem-card .icon {
+      width: 42px;
+      height: 42px;
+      margin: 0;
+      border-radius: 999px;
+      border-color: rgba(214, 168, 95, .22);
+      background:
+        linear-gradient(180deg, rgba(214,168,95,.16), rgba(214,168,95,.08)),
+        rgba(255,255,255,.045);
+      color: #e7c17e;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    .problem-status {
+      min-width: 0;
+      padding: 6px 9px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 999px;
+      color: #d7cbbd;
+      background: rgba(10, 11, 12, .28);
+      font-size: 11px;
+      font-weight: 780;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .problem-card h3 {
+      max-width: 13ch;
+      margin-bottom: 12px;
+      font-size: clamp(1.15rem, 1.45vw, 1.35rem);
+      line-height: 1.16;
       text-wrap: balance;
     }
 
-    .problem-card:not(:first-child) {
-      display: grid;
-      grid-template-columns: 54px 1fr;
-      column-gap: 18px;
-      align-items: start;
+    .problem-card p {
+      max-width: 32ch;
+      color: #b9aea1;
+      line-height: 1.58;
     }
 
-    .problem-card:not(:first-child) .icon {
-      margin: 0;
+    .problem-meter {
+      width: 100%;
+      height: 7px;
+      margin-top: auto;
       border-radius: 999px;
-      background: rgba(214, 168, 95, .12);
-      color: #e7c17e;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.28);
+    }
+
+    .problem-meter span {
+      display: block;
+      width: var(--meter);
+      height: 100%;
+      border-radius: inherit;
+      background:
+        linear-gradient(90deg, var(--meter-color), rgba(255,255,255,.28));
+      box-shadow: 0 0 18px color-mix(in srgb, var(--meter-color), transparent 45%);
+    }
+
+    .problem-metric {
+      margin-top: 10px;
+      color: #dac9b4;
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: .02em;
     }
 
     .solution-grid {
@@ -1692,13 +1809,11 @@
     @media (max-width: 980px) {
       .problem-grid,
       .diff-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .problem-card:first-child,
-      .diff-card.featured {
-        grid-row: auto;
-        grid-column: auto;
+      .layout-wrap {
+        grid-template-columns: 1fr;
       }
 
       .solution-grid {
@@ -1716,9 +1831,23 @@
     }
 
     @media (max-width: 720px) {
-      .problem-card:not(:first-child) {
+      .layout-wrap,
+      .problem-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+      }
+
+      .layout-wrap > *,
+      .problem-card {
+        min-width: 0;
+      }
+
+      .problem-card {
+        min-height: 0;
+      }
+
+      .problem-card h3,
+      .problem-card p {
+        max-width: none;
       }
 
       .solution-grid {
@@ -2008,29 +2137,50 @@
     <section id="problem">
       <div class="shell">
         <div class="section-head">
+          <div class="problem-kicker">Normal timers count the wrong thing</div>
           <h2>The alarm was honest. The timer was wrong.</h2>
           <p class="lead">Most nap tools start counting the moment you lie down. NapGuard is built around the messier reality: it can take a while to settle, and missing the window can wreck the night.</p>
         </div>
         <div class="problem-grid">
           <article class="card problem-card">
-            <div class="icon">01</div>
+            <div class="problem-top">
+              <div class="icon">01</div>
+              <span class="problem-status">Intent</span>
+            </div>
             <h3>You lie down tired.</h3>
             <p>After class, work, travel, or studying, a short nap sounds like the responsible option.</p>
+            <div class="problem-meter" aria-hidden="true"><span></span></div>
+            <span class="problem-metric">20 min planned</span>
           </article>
           <article class="card problem-card">
-            <div class="icon">02</div>
+            <div class="problem-top">
+              <div class="icon">02</div>
+              <span class="problem-status">Mismatch</span>
+            </div>
             <h3>The alarm starts now.</h3>
             <p>A 20-minute timer starts while you are still awake, settling in, adjusting the room, or trying to relax.</p>
+            <div class="problem-meter" aria-hidden="true"><span></span></div>
+            <span class="problem-metric">Counting while awake</span>
           </article>
           <article class="card problem-card">
-            <div class="icon">03</div>
+            <div class="problem-top">
+              <div class="icon">03</div>
+              <span class="problem-status">Penalty</span>
+            </div>
             <h3>You wake too soon.</h3>
             <p>If it takes 15 minutes to fall asleep, your “20-minute nap” may become five minutes of actual rest.</p>
+            <div class="problem-meter" aria-hidden="true"><span></span></div>
+            <span class="problem-metric">5 min actual rest</span>
           </article>
           <article class="card problem-card">
-            <div class="icon">04</div>
+            <div class="problem-top">
+              <div class="icon">04</div>
+              <span class="problem-status">Spillover</span>
+            </div>
             <h3>Or you oversleep hard.</h3>
             <p>Snooze, silence, or set it too long and the nap turns into hours. You wake groggy, sweaty, and wide awake at night.</p>
+            <div class="problem-meter" aria-hidden="true"><span></span></div>
+            <span class="problem-metric">Hours lost</span>
           </article>
         </div>
       </div>
