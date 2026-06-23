@@ -1270,6 +1270,12 @@
       transition: transform .16s ease, box-shadow .16s ease;
     }
 
+    .submit:disabled {
+      cursor: wait;
+      opacity: .72;
+      transform: none;
+    }
+
     .faq-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -1749,6 +1755,13 @@
       box-shadow: 0 14px 36px rgba(0,0,0,.14);
     }
 
+    .success.error {
+      border-color: rgba(204, 124, 98, .5);
+      background:
+        linear-gradient(145deg, rgba(204, 124, 98, .16), rgba(255,255,255,.045));
+      color: #ffe3dc;
+    }
+
     .success strong {
       display: block;
       color: #fff8ee;
@@ -1857,12 +1870,8 @@
           <a class="btn primary" href="#waitlist">Stop my 3-hour naps</a>
           <a class="btn secondary" href="#how">See how it works</a>
         </div>
-        <!-- Backend options for this hero capture:
-             Formspree: add action="https://formspree.io/f/FORM_ID" method="POST".
-             Google Forms: replace the form action with your Google Forms formResponse URL and map the email input name.
-             Supabase: replace the JS submit handler below with supabase.from("waitlist").insert(entry).
-             Airtable: POST to your Airtable automation/webhook endpoint from a serverless form provider.
-             Tally: replace this mini form with a Tally embed or link if you want hosted validation analytics. -->
+        <!-- Formspree: paste your public endpoint into FORMSPREE_ENDPOINT in the script below.
+             Keep this form static; the shared submit handler sends JSON with fetch(). -->
         <form class="hero-capture waitlist-capture" data-source="hero-mini" aria-describedby="hero-success-message">
           <label class="sr-only" for="hero-email">Email for the first test group</label>
           <input id="hero-email" type="email" name="email" autocomplete="email" placeholder="Email for the first test group" required />
@@ -2192,12 +2201,8 @@
         <div class="card form-card">
           <h3>Join the first test group</h3>
           <p class="test-group-note">Tell us how often naps get away from you. We will use this to prioritize early testers and product interviews.</p>
-          <!-- Backend options for this main waitlist:
-               Formspree: add action="https://formspree.io/f/FORM_ID" method="POST" to this form.
-               Google Forms: replace the form action with your Google Forms formResponse URL and map each field name.
-               Supabase: replace the localStorage submit handler below with supabase.from("waitlist").insert(entry).
-               Airtable: use a form backend or serverless endpoint to create Airtable records; do not expose API keys here.
-               Tally: replace this form with an embedded Tally form if you want hosted analytics and follow-up workflows. -->
+          <!-- Formspree: paste your public endpoint into FORMSPREE_ENDPOINT in the script below.
+               Keep this form static; the shared submit handler sends JSON with fetch(). -->
           <form id="waitlist-form" class="waitlist-capture" data-source="main-waitlist" aria-describedby="backend-note success-message">
             <label>
               Email
@@ -2231,7 +2236,7 @@
             <button class="submit" type="submit">Join the early test group</button>
           </form>
           <div class="success" id="success-message" role="status" aria-live="polite"></div>
-          <p class="backend-note" id="backend-note">Prototype note: submissions are stored locally in this browser for now. Connect Formspree, Tally, Supabase, Airtable, or Google Forms before running real traffic.</p>
+          <p class="backend-note" id="backend-note">Submissions are sent to Formspree when the endpoint is configured. A browser backup is kept after successful sends, and failed attempts are saved locally so the user can try again.</p>
         </div>
       </div>
     </section>
@@ -2290,7 +2295,9 @@
   </footer>
 
   <script>
-    const WAITLIST_STORAGE_KEY = "napguardWaitlist";
+    const FORMSPREE_ENDPOINT = "PASTE_FORMSPREE_ENDPOINT_HERE";
+    const WAITLIST_BACKUP_KEY = "napguardWaitlistBackup";
+    const WAITLIST_FAILED_KEY = "napguardWaitlistFailed";
     const waitlistForms = document.querySelectorAll(".waitlist-capture");
 
     function getStatusTarget(form) {
@@ -2299,45 +2306,117 @@
         : document.querySelector("#hero-success-message");
     }
 
-    function setStatus(form, message) {
-      const target = getStatusTarget(form);
-      if (!target) return;
-      target.innerHTML = message;
-      target.classList.add("show");
+    function getFormPayload(form) {
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      Object.keys(data).forEach((key) => {
+        if (typeof data[key] === "string") {
+          data[key] = data[key].trim();
+        }
+      });
+
+      return {
+        ...data,
+        source: form.dataset.source || "waitlist",
+        submittedAt: new Date().toISOString()
+      };
+    }
+
+    function saveBackup(key, payload) {
+      try {
+        const existing = JSON.parse(localStorage.getItem(key) || "[]");
+        existing.push(payload);
+        localStorage.setItem(key, JSON.stringify(existing));
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function showMessage(element, type, message) {
+      if (!element) return;
+      element.classList.remove("error");
+      element.classList.toggle("error", type === "error");
+      element.setAttribute("role", type === "error" ? "alert" : "status");
+      element.setAttribute("aria-live", type === "error" ? "assertive" : "polite");
+      element.innerHTML = message;
+      element.classList.add("show");
+    }
+
+    function setSubmitting(form, isSubmitting) {
+      const button = form.querySelector("button[type='submit']");
+      if (!button) return;
+
+      if (!button.dataset.originalText) {
+        button.dataset.originalText = button.textContent;
+      }
+
+      button.disabled = isSubmitting;
+      button.textContent = isSubmitting ? "Joining…" : button.dataset.originalText;
+    }
+
+    async function submitToFormspree(payload) {
+      if (!FORMSPREE_ENDPOINT || FORMSPREE_ENDPOINT === "PASTE_FORMSPREE_ENDPOINT_HERE") {
+        throw new Error("Formspree endpoint is not configured.");
+      }
+
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        let detail = "";
+        try {
+          const result = await response.json();
+          detail = result.errors?.map((error) => error.message).join(" ") || result.error || "";
+        } catch (error) {
+          detail = response.statusText;
+        }
+
+        throw new Error(detail || "Formspree rejected the submission.");
+      }
+
+      return response.json().catch(() => ({}));
     }
 
     waitlistForms.forEach((form) => {
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
-        const entry = {
-          ...data,
-          source: form.dataset.source || "waitlist",
-          submittedAt: new Date().toISOString()
-        };
 
-        /*
-          Static prototype storage only. Replace this block when connecting a real backend:
-          - Formspree: remove event.preventDefault(), add action/method, and let the browser POST.
-          - Tally: replace this form with a Tally embed or hosted form link.
-          - Google Forms: POST mapped fields to the formResponse endpoint.
-          - Supabase: await supabase.from("waitlist").insert(entry).
-          - Airtable: send the entry through a form backend or serverless endpoint; never expose API keys here.
-        */
+        const messageTarget = getStatusTarget(form);
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const payload = getFormPayload(form);
+        setSubmitting(form, true);
+
         try {
-          const existing = JSON.parse(localStorage.getItem(WAITLIST_STORAGE_KEY) || "[]");
-          existing.push(entry);
-          localStorage.setItem(WAITLIST_STORAGE_KEY, JSON.stringify(existing));
+          await submitToFormspree(payload);
+          saveBackup(WAITLIST_BACKUP_KEY, payload);
           form.reset();
-          setStatus(
-            form,
-            "<strong>Prototype signup saved locally.</strong> This browser stored your response for validation testing. Connect Formspree, Tally, Google Forms, Supabase, or Airtable before driving real traffic."
+          showMessage(
+            messageTarget,
+            "success",
+            "<strong>You are on the early test list.</strong> Thanks for joining NapGuard. We sent your signup and kept a local backup in this browser."
           );
         } catch (error) {
-          setStatus(
-            form,
-            "<strong>We could not save this prototype signup.</strong> Your browser blocked local storage. Connect a real form backend before collecting live signups."
+          const savedFailedAttempt = saveBackup(WAITLIST_FAILED_KEY, payload);
+          showMessage(
+            messageTarget,
+            "error",
+            savedFailedAttempt
+              ? "<strong>Something went wrong.</strong> We saved this attempt in your browser so the details are not lost. Please try again in a moment."
+              : "<strong>Something went wrong.</strong> Please copy your details and try again in a moment."
           );
+        } finally {
+          setSubmitting(form, false);
         }
       });
     });

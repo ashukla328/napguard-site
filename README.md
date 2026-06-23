@@ -4,14 +4,15 @@ This repository contains a validation landing page and visual concept assets for
 
 ## Files
 
-- `index.html` - polished validation landing page with product positioning, sensor layout, FAQ, and a localStorage waitlist form.
+- `index.html` - polished validation landing page with product positioning, sensor layout, FAQ, and static Formspree-ready waitlist forms.
+- `napguard-social-card.svg` - static Open Graph / Twitter preview artwork used by the homepage metadata.
 - `napguard-concept.html` - earlier product concept page with an interactive Three.js model.
 - `outputs/napguard-model.scad` - simple OpenSCAD model for CAD-style geometry exploration.
 - `vercel.json` - minimal Vercel static-site settings.
 
 ## View the landing page
 
-Open `index.html` directly in a browser. The landing page is static and stores waitlist submissions in browser localStorage under `napguardWaitlist`.
+Open `index.html` directly in a browser. The landing page is static and posts waitlist submissions to Formspree after you paste your public endpoint into `FORMSPREE_ENDPOINT` near the bottom of `index.html`. Successful submissions are backed up in browser localStorage under `napguardWaitlistBackup`; failed attempts are stored under `napguardWaitlistFailed`.
 
 ## Vercel deployment settings
 
